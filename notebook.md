@@ -6,7 +6,7 @@
 - [X] Exercise: 3
 - [X] Exercise: 4
 - [X] Exercise: 5
-- [ ] Exercise: 8
+- [X] Exercise: 8
 - [ ] Investigate Cloud Secrets Managers
 - [ ] Investigate Authentication Methodologies
 
@@ -19,5 +19,5 @@
 - [X] Installed Pyenv with 3.7.4 as default
 - [X] Updated Pip
 - [X] installed ePub Reade (Calibre)
-- [ ] :O2: use empty lines in markdown
+- [X] :O2: use empty lines in markdown
 

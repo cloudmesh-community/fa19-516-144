@@ -23,8 +23,12 @@ Carbon Footprint Calculator".
 
 ## References
 
-1. http://94.247.169.249/wp-content/uploads/2014/11/cs\_datacenter\_2011\_eng.pdf
-1. https://www.equinix.com/data-centers/design/green-data-centers/pue-metrics/
+1. <http://94.247.169.249/wp-content/uploads/2014/11/cs\_datacenter\_2011\_eng.pdf>
+1. <https://www.equinix.com/data-centers/design/green-data-centers/pue-metrics/>
+
+# Exercise 3: Personal Carbon 
+
+Submitted information to URL.  
 
 # Exercise 4: Renewable Energy Data Center
 
@@ -37,10 +41,10 @@ and ventilation systems throughout the data center.
 
 ## References
 
-1. https://www.datacenterknowledge.com/data-centers-that-recycle-waste-heat
-1. http://94.247.169.249/wp-content/uploads/2014/11/cs\_datacenter\_2011\_eng.pdf
-1. https://www.equinix.com/data-centers/design/green-data-centers/pue-metrics/
-1. https://www.smithgroup.com/perspectives/2018/waste-heat-recovery-in-data-centers
+1. <https://www.datacenterknowledge.com/data-centers-that-recycle-waste-heat>
+1. <http://94.247.169.249/wp-content/uploads/2014/11/cs\_datacenter\_2011\_eng.pdf>
+1. <https://www.equinix.com/data-centers/design/green-data-centers/pue-metrics/>
+1. <https://www.smithgroup.com/perspectives/2018/waste-heat-recovery-in-data-centers>
 
 # Exercise 5: Renewable Energy Country Efforts: Germany
 
@@ -54,7 +58,21 @@ incentive to quickly build and install solar power within Germany.
 
 ## References
 
-1. https://www.technologyreview.com/s/601514/germany-runs-up-against-the-limits-of-renewables/
-1. https://www.cleanenergywire.org/news/renewables-cover-about-100-german-power-use-first-time-ever
-1. https://fortune.com/2017/03/14/germany-renewable-clean-energy-solar/  
-1. https://www.cleanenergywire.org/factsheets/solar-power-germany-output-business-perspectives  
+1. <https://www.technologyreview.com/s/601514/germany-runs-up-against-the-limits-of-renewables/>
+1. <https://www.cleanenergywire.org/news/renewables-cover-about-100-german-power-use-first-time-ever>
+1. <https://fortune.com/2017/03/14/germany-renewable-clean-energy-solar/> 
+1. <https://www.cleanenergywire.org/factsheets/solar-power-germany-output-business-perspectives>
+
+# Exercise 8: Datacenter Outage Analysis: Delta Airlines
+
+During three days August of 2016 Delta Airlines Atlanta data center experienced a power
+outage in their Atlanta data center. This outage required Delta to ground all flights
+for three days. 451 total flights were cancelled due to the outage. This outage cost 
+Delta over $150,000,000 due to the loss of potential tickets which excludes the
+number of travellers that were given cash and hotel compensation due to the cancelled
+flights.
+
+## References
+
+1. <https://www.datacenterknowledge.com/archives/2016/08/08/delta-data-center-outage-grounds-hundreds-flights>
+1. <https://www.datacenterknowledge.com/archives/2016/09/08/delta-data-center-outage-cost-us-150m>
