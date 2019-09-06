@@ -1,23 +1,28 @@
-# Exercise 2: Carbon Footprint of Data Centers
+# Datacenter
 
-Data Center: Condorcet Data center  
-Location: Paris, France  
-Year: 2009  
-Electricity Cost: 0.14  
-IT Load: 6400  
-Yearly Cost: 15,681,000  
-Yearly CO2 Footprint: 9307  
-Equivalence in cars: 2051  
+## Exercise 2: Carbon Footprint of Data Centers
 
-## Note: PUE of Condorcet Data Center
+```
+Data Center: Condorcet Data center
+Location: Paris, France
+Year: 2009
+Electricity Cost: 0.14
+IT Load: 6400
+Yearly Cost: 15,681,000
+Yearly CO2 Footprint: 9307
+Equivalence in cars: 2051
+```
+
+### Note: PUE of Condorcet Data center
 
 Electricity Cost PUE is assumed to be 2.0. No resource with a specific PUE for the
 Condorcet data center was discovered. 
 Equinix (TelecityGroup) stated in reference three that the average annual PUE falls under
 category three it is assumed their efficiency is average. Thus 2.0 was the selected
 value.
+
 This assumption doubles the total input power thus drastically increasing power cost in
-comparison to a simple multiplication of electricity\_cost\*load\*hours\_in\_year
+comparison to a simple multiplication of `electricity_cost*load*hours_in_year`
 Yearly cost, CO2 footprint, and equivalence of cars are calculated by the "Data Center
 Carbon Footprint Calculator".
 
