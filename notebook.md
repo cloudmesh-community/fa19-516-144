@@ -1,3 +1,15 @@
+# Week 2
+
+- [X] Read Chapter 4: Data Center
+- [X] Exercise: 2.a
+- [X] Exercise: 2.b
+- [X] Exercise: 3
+- [X] Exercise: 4
+- [X] Exercise: 5
+- [ ] Exercise: 8
+- [ ] Investigate Cloud Secrets Managers
+- [ ] Investigate Authentication Methodologies
+
 # Week 1
 
 - [x] Posted Professional Bio
