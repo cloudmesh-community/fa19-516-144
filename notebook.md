@@ -1,4 +1,6 @@
-# Week 2
+# fa19-516-144
+
+## Week 2
 
 - [X] Read Chapter 4: Data Center
 - [X] Exercise: 2.a
@@ -10,7 +12,7 @@
 - [ ] Investigate Cloud Secrets Managers
 - [ ] Investigate Authentication Methodologies
 
-# Week 1
+## Week 1
 
 - [x] Posted Professional Bio
 - [X] Setup Computer
