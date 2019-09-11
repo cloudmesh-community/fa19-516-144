@@ -2,6 +2,8 @@
 
 :o2: please use propper assignment names such as E.Datacenter.3
 
+:o2: fix urls with _
+
 ## Exercise 2: Carbon Footprint of Data Centers
 
 ```
