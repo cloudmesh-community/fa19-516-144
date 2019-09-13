@@ -35,3 +35,15 @@
 - [X] Installed Pyenv with 3.7.4 as default
 - [X] Updated Pip
 - [X] installed ePub Reade (Calibre)
+
+## Environment Installations
+
+### Python
+
+sudo apt-get install python virtualenv pyenv
+pyenv install 3.7.4
+pyenv global 3.7.4
+pyenv virtualenv ENV3
+pyenv activate ENV3
+...
+pyenv ENV3 deactivate
