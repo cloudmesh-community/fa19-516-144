@@ -35,5 +35,3 @@
 - [X] Installed Pyenv with 3.7.4 as default
 - [X] Updated Pip
 - [X] installed ePub Reade (Calibre)
-- [X] :O2: use empty lines in markdown
-

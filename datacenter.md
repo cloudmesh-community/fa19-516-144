@@ -1,7 +1,5 @@
 # Datacenter fa19-516-144
 
-:o2: please use propper assignment names such as E.Datacenter.3
-
 ## E.Datacenter.2.a
 
 ```
