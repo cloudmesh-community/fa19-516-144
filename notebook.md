@@ -1,5 +1,21 @@
 # fa19-516-144
 
+## Week 3
+
+- [X] Correct Datacenter.md
+- [X] Read "Architectures" chapter
+- [X] Read "Cloudmesh" chapter
+- [X] E.Cloudmesh.Common.1
+- [X] E.Cloudmesh.Common.2
+- [X] E.Cloudmesh.Common.3
+- [X] E.Cloudmesh.Common.4
+- [X] E.Cloudmesh.Common.5
+- [X] E.Cloudmesh.Shell.1
+- [X] E.Cloudmesh.Shell.2
+- [ ] Investigate Cloud Secrets Managers
+- [ ] Investigate Authentication Methodologies
+- [ ] Project Selection
+
 ## Week 2
 
 - [X] Read Chapter 4: Data Center
@@ -9,8 +25,6 @@
 - [X] Exercise: 4
 - [X] Exercise: 5
 - [X] Exercise: 8
-- [ ] Investigate Cloud Secrets Managers
-- [ ] Investigate Authentication Methodologies
 
 ## Week 1
 

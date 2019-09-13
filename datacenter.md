@@ -2,9 +2,7 @@
 
 :o2: please use propper assignment names such as E.Datacenter.3
 
-:o2: fix urls with _
-
-## Exercise 2: Carbon Footprint of Data Centers
+## E.Datacenter.2.a
 
 ```
 Data Center: Condorcet Data center
@@ -32,14 +30,18 @@ Carbon Footprint Calculator".
 
 ### References
 
-1. <http://94.247.169.249/wp-content/uploads/2014/11/cs\_datacenter\_2011\_eng.pdf>
+1. <http://94.247.169.249/wp-content/uploads/2014/11/cs_datacenter_2011_eng.pdf>
 1. <https://www.equinix.com/data-centers/design/green-data-centers/pue-metrics/>
 
-## Exercise 3: Personal Carbon 
+## E.Datacenter.2.b
+
+Data has been placed within the file
+
+## E.Datacenter.3 
 
 Submitted information to URL.  
 
-## Exercise 4: Renewable Energy Data Center
+## E.Datacenter.4
 
 Recyclers use the excess heat produced from the data center and reuses it in another
 productive fashion. The Condorcet Data Center utilizes the excessive heat from the data
@@ -51,11 +53,11 @@ and ventilation systems throughout the data center.
 ### References
 
 1. <https://www.datacenterknowledge.com/data-centers-that-recycle-waste-heat>
-1. <http://94.247.169.249/wp-content/uploads/2014/11/cs\_datacenter\_2011\_eng.pdf>
+1. <http://94.247.169.249/wp-content/uploads/2014/11/cs_datacenter_2011_eng.pdf>
 1. <https://www.equinix.com/data-centers/design/green-data-centers/pue-metrics/>
 1. <https://www.smithgroup.com/perspectives/2018/waste-heat-recovery-in-data-centers>
 
-## Exercise 5: Renewable Energy Country Efforts: Germany
+## E.Datacenter.5
 
 Germany is a major contributor to global solar energy production. In 2017 Germany produced
 36.1% of its energy from solar power. In 2016 Germany at one point met the energy demands
@@ -72,7 +74,7 @@ incentive to quickly build and install solar power within Germany.
 1. <https://fortune.com/2017/03/14/germany-renewable-clean-energy-solar/> 
 1. <https://www.cleanenergywire.org/factsheets/solar-power-germany-output-business-perspectives>
 
-## Exercise 8: Datacenter Outage Analysis: Delta Airlines
+## E.Datacenter.8
 
 During three days August of 2016 Delta Airlines Atlanta data center experienced a power
 outage in their Atlanta data center. This outage required Delta to ground all flights
