@@ -16,14 +16,14 @@ import time
 # E.Cloudmesh.Common.5
 StopWatch.start("test")
 
+# E.Cloudmesh.Common.1
+banner("Exercise Cloudmesh Common", color="GREEN")
+
 # Sets variables within  ~/.cloudmesh/var-data 
 varz = Variables()
 varz['debug'] = True
 varz['trace'] = True
 varz['verbose'] = 10
-
-# E.Cloudmesh.Common.1
-banner("Exercise Cloudmesh Common", color="GREEN")
 
 class Common:
 	def __init__(self):
