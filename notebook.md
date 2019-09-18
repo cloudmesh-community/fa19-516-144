@@ -12,6 +12,8 @@
 - [X] E.Cloudmesh.Common.5
 - [X] E.Cloudmesh.Shell.1
 - [X] E.Cloudmesh.Shell.2
+- [X] E.Cloudmesh.Shell.3
+- [X] installed mongodb version 3.2.11
 - [ ] Investigate Cloud Secrets Managers
 - [ ] Investigate Authentication Methodologies
 - [ ] Project Selection
@@ -47,3 +49,18 @@ pyenv virtualenv ENV3
 pyenv activate ENV3  
 ...  
 pyenv ENV3 deactivate  
+
+
+### Cloudmesh
+
+pyenv activate ENV3  
+mkdir cm  
+cd cm  
+pip install cloudmesh-installer  
+cloudmesh-installer git clone cms  
+cloudmesh-installer install cms -e
+cloudmesh-installer install cloud -e 
+
+### Software
+
+sudo apt-get install mongodb
