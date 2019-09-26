@@ -1,5 +1,12 @@
 # fa19-516-144
 
+## Week 4
+
+- [] Installed mongodb through cms admin
+- [X] Exercise 1  
+- [] Exercise 2  
+- [] Exercise 3  
+
 ## Week 3
 
 - [X] Correct Datacenter.md
@@ -14,9 +21,9 @@
 - [X] E.Cloudmesh.Shell.2
 - [X] E.Cloudmesh.Shell.3
 - [X] installed mongodb version 3.2.11
-- [ ] Investigate Cloud Secrets Managers
-- [ ] Investigate Authentication Methodologies
-- [ ] Project Selection
+- [X] Investigate Cloud Secrets Managers
+- [X] Investigate Authentication Methodologies
+- [X] Add project/report.md
 
 ## Week 2
 
@@ -61,6 +68,14 @@ cloudmesh-installer git clone cms
 cloudmesh-installer install cms -e
 cloudmesh-installer install cloud -e 
 
-### Software
+cloudmesh-installer git clone storage  
+cloudmesh-instalser install storage -e  
+### MongoDB
 
+<<<<<<< Updated upstream
 sudo apt-get install mongodb
+=======
+1. Instal Cloudmesh  
+2. Edit ~/.cloudmesh/cloudmesh.yaml set cloudmesh:mongo:MONGO\_AUTOINSTALL: True  
+3. cms admin install mongo
+>>>>>>> Stashed changes
