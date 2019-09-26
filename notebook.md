@@ -9,41 +9,41 @@
 
 ## Week 3
 
-- [X] Correct Datacenter.md
-- [X] Read "Architectures" chapter
-- [X] Read "Cloudmesh" chapter
-- [X] E.Cloudmesh.Common.1
-- [X] E.Cloudmesh.Common.2
-- [X] E.Cloudmesh.Common.3
-- [X] E.Cloudmesh.Common.4
-- [X] E.Cloudmesh.Common.5
-- [X] E.Cloudmesh.Shell.1
-- [X] E.Cloudmesh.Shell.2
-- [X] E.Cloudmesh.Shell.3
-- [X] installed mongodb version 3.2.11
-- [X] Investigate Cloud Secrets Managers
-- [X] Investigate Authentication Methodologies
-- [X] Add project/report.md
+- [X] Correct Datacenter.md  
+- [X] Read "Architectures" chapter  
+- [X] Read "Cloudmesh" chapter  
+- [X] E.Cloudmesh.Common.1  
+- [X] E.Cloudmesh.Common.2  
+- [X] E.Cloudmesh.Common.3  
+- [X] E.Cloudmesh.Common.4  
+- [X] E.Cloudmesh.Common.5  
+- [X] E.Cloudmesh.Shell.1  
+- [X] E.Cloudmesh.Shell.2  
+- [X] E.Cloudmesh.Shell.3  
+- [X] installed mongodb version 3.2.11  
+- [X] Investigate Cloud Secrets Managers  
+- [X] Investigate Authentication Methodologies  
+- [X] Create and update project/report.md with project proposal  
 
 ## Week 2
 
-- [X] Read Chapter 4: Data Center
-- [X] Exercise: 2.a
-- [X] Exercise: 2.b
-- [X] Exercise: 3
-- [X] Exercise: 4
-- [X] Exercise: 5
-- [X] Exercise: 8
+- [X] Read Chapter 4: Data Center  
+- [X] Exercise: 2.a  
+- [X] Exercise: 2.b  
+- [X] Exercise: 3  
+- [X] Exercise: 4  
+- [X] Exercise: 5  
+- [X] Exercise: 8  
 
 ## Week 1
 
-- [x] Posted Professional Bio
-- [X] Setup Computer
-- [X] Created cloud accounts
-- [X] Filled out 'Cloud Accounts' form
-- [X] Installed Pyenv with 3.7.4 as default
-- [X] Updated Pip
-- [X] installed ePub Reade (Calibre)
+- [x] Posted Professional Bio  
+- [X] Setup Computer  
+- [X] Created cloud accounts  
+- [X] Filled out 'Cloud Accounts' form  
+- [X] Installed Pyenv with 3.7.4 as default  
+- [X] Updated Pip  
+- [X] installed ePub Reade (Calibre)  
 
 ## Environment Installations
 
@@ -65,17 +65,13 @@ mkdir cm
 cd cm  
 pip install cloudmesh-installer  
 cloudmesh-installer git clone cms  
-cloudmesh-installer install cms -e
-cloudmesh-installer install cloud -e 
+cloudmesh-installer install cms -e  
+cloudmesh-installer install cloud -e   
 
 cloudmesh-installer git clone storage  
 cloudmesh-instalser install storage -e  
 ### MongoDB
 
-<<<<<<< Updated upstream
-sudo apt-get install mongodb
-=======
 1. Instal Cloudmesh  
 2. Edit ~/.cloudmesh/cloudmesh.yaml set cloudmesh:mongo:MONGO\_AUTOINSTALL: True  
 3. cms admin install mongo
->>>>>>> Stashed changes
