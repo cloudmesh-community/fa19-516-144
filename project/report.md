@@ -8,8 +8,8 @@
 ## Introduction
 
 Increase the security capabilities of Cloudmesh be encrypting the cloudmesh.yaml  
-file. Currently the configuration file is left in plaintext thus leaving
-passwords to chameleon cloud and mongodb vulnerable to any malicious user that   
+file. Currently the configuration file is left in plaintext thus leaving  
+passwords to chameleon cloud and mongodb vulnerable to any malicious user that  
 gains access to the machine the file is hosted on. Encrypting the config file  
 decreases the attack surface.   
 
