@@ -62,5 +62,15 @@ can automate the generation, storage, and access of the keys and config.
 
 ## Progress
 
+### Week of Monday Sep. 30th 
+
+#### Andrew
+
+1. Researched password managers for future integration discovered  
+	1. [kpcli](<http://kpcli.sourceforge.net/>)  
+	2. [gopass](<https://www.gopass.pw/>)  
+	3. [kedpm](<http://kedpm.sourceforge.net/>)  
+	4. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)  
+
 ## References
 
