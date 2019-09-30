@@ -56,10 +56,11 @@ can automate the generation, storage, and access of the keys and config.
 * Elliptic Curve Cryptography  
 * Advanced Encryption Standard Galois Counter Mode (AES-GCM)
 
-## References
-
-## Progress
-
 ## Workbreakdown
 
 [Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
+
+## Progress
+
+## References
+
