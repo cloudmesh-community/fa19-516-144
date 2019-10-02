@@ -1,11 +1,19 @@
 # fa19-516-144
 
+## Week 5
+
+- [] audit /cms-cloud/cms/managment/config/security/encrypt.py-bug
+- [] audit /cms-cloud/cms/security/encrypt.py-bug
+
 ## Week 4
 
-- [] Installed mongodb through cms admin
+- [X] Installed mongodb through cms admin
+- [X] verified name.yaml file is of correct format
+- [X] Created chameleon-success.md
 - [X] Exercise 1  
-- [] Exercise 2  
-- [] Exercise 3  
+- [] Exercise 2  (Gregor stated I can skip this due to my submitted PR)
+- [] Exercise 3  (Gregor stated I can skip this due to my submitted PR)
+- [X] Submitted pull request to support cms admin mongo install on debian
 
 ## Week 3
 
@@ -49,29 +57,29 @@
 
 ### Python
 
-sudo apt-get install python virtualenv pyenv  
-pyenv install 3.7.4  
-pyenv global 3.7.4  
-pyenv virtualenv ENV3  
-pyenv activate ENV3  
-...  
-pyenv ENV3 deactivate  
+1. sudo apt-get install python virtualenv pyenv  
+1. pyenv install 3.7.4  
+1. pyenv global 3.7.4  
+1. pyenv virtualenv ENV3  
+1. pyenv activate ENV3  
+1. ...  
+1. pyenv ENV3 deactivate  
 
 
-### Cloudmesh
+### Cloudmesh Cloud
 
-pyenv activate ENV3  
-mkdir cm  
-cd cm  
-pip install cloudmesh-installer  
-cloudmesh-installer git clone cms  
-cloudmesh-installer install cms -e  
-cloudmesh-installer install cloud -e   
+1. pyenv activate ENV3  
+1. mkdir cm  
+1. cd cm  
+1. pip install cloudmesh-installer  
+1. cloudmesh-installer git clone cms  
+1. cloudmesh-installer install cms -e  
+1. cloudmesh-installer install cloud -e   
 
-cloudmesh-installer git clone storage  
-cloudmesh-instalser install storage -e  
 ### MongoDB
 
-1. Instal Cloudmesh  
-2. Edit ~/.cloudmesh/cloudmesh.yaml set cloudmesh:mongo:MONGO\_AUTOINSTALL: True  
-3. cms admin install mongo
+1. cloudmesh-installer git pull cloud
+2. cloudmesh-installer install cloud -e
+3. Edited cloudmesh.yaml to include passwords and profile information
+4. cms help
+5. cms init

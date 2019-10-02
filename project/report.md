@@ -71,6 +71,7 @@ can automate the generation, storage, and access of the keys and config.
 	2. [gopass](<https://www.gopass.pw/>)  
 	3. [kedpm](<http://kedpm.sourceforge.net/>)  
 	4. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)  
+1. Submitted PR for debian 9 installation of mongo  
 
 ## References
 
