@@ -74,6 +74,7 @@ can automate the generation, storage, and access of the keys and config.
 1. Submitted PR for debian 9 installation of mongo  
 1. Installed docker on local system to ease testing
 1. Began audit of cms-cloud/cms/security/encrypt.py-bug check /project/audit.md
+1. Took second pass look through the encrypt.py-bug. Wrote questions for Gregor  
 
 ## References
 
