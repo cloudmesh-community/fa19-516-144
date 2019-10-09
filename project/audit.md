@@ -7,7 +7,7 @@ Updated: Oct. 03 2019
 
 ## Analysis: cloudmesh-cloud/cloudmesh/security/encrypt.py
 
-1. Complete  
+1. Pending Answers from Gregor
 
 ### General Notes
 
@@ -56,4 +56,29 @@ Updated: Oct. 03 2019
 
 ## Analysis: cloudmesh-cloud/cms/management/configuration/security/encryption.py
 
-1. Pending
+1. Current
+
+### General Notes
+
+1. Passwords are written to files. They should either be stored in some type of
+password manager or avoided by manipulating the bytes directly  
+1. The use of path\_expand() seem unnecassary given the init function  
+1. Use of aes-cbc with openssl should be avoided, due to potential padding-oracle
+attacks. Using aes-gcm avoids risk and introduces integrity and auth checks.  
+1. Could avoid the randomKey function if using ECC key derivation. 
+1. ssh-keygen is destructive if id\_rsa already exists. Should use path args. 
+1. Missing verification of public and private keys on cert  
+1. 
+
+### Notes on Functions
+
+1. getPublicKey()  
+    1. Assuming cert is X.509 you can use pyca to extract the key
+1. pem\_verify(): attempts to verify cert chain of trust  
+    1. Issue unde investigation
+1. check\_key(): checking if private key is in PEM format  
+    1. could use pyca's load pem functions which already has checks
+
+### Open Questions
+
+

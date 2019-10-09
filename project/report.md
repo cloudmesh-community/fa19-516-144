@@ -44,6 +44,17 @@ can automate the generation, storage, and access of the keys and config.
 
 1. Add pam\_ssh capabilities to control access to ssh-add
 
+## Gregor's Wish List
+
+1. Write a small paragraph for the book explaining public/private keys  
+    1. What they are  
+    1. What you can do with them  
+    1. The steps for use  
+    1. Proper handling  
+
+1. Update Shell.distribution()  
+1. Implement cms key group command  
+1. Implement encryption for config file
 
 ## Proposed Software to Integrate into Project
 
