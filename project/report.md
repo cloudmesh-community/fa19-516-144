@@ -62,6 +62,17 @@ can automate the generation, storage, and access of the keys and config.
 
 ## Progress
 
+### Week of Monday Oct. 07th
+
+#### Andrew
+
+1. Forked cloudmesh-cloud to local repo  
+    1. fork located [here](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
+1. Edited cms key --source=FILEPATH to now parse filepath argument  
+    1. Within [key-group branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/key-group>)  
+1. Investigating how to add new local-keygroup collection to database  
+1. Installed robo3t to observe changes to local mongodb  
+
 ### Week of Monday Sep. 30th 
 
 #### Andrew
