@@ -2,6 +2,10 @@
 
 ## Group Members
 
+:o2: hids missing
+
+:o2: please define project in more detail, e.g. Nayeems project
+
 - Nayeem (nayeemullahbaig.93@gmail.com)  
 - Andrew Holland (hollanaa@iu.edu)  
 
