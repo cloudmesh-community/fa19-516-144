@@ -6,6 +6,9 @@
 
 :o2: please define project in more detail, e.g. Nayeems project
 
+:o2: please note taht keys can just be added to authorized keys and pam may not be needed. Goal of pam is not properly described
+
+
 - Nayeem (nayeemullahbaig.93@gmail.com)  
 - Andrew Holland (hollanaa@iu.edu)  
 
