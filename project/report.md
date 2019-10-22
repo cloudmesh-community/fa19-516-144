@@ -2,8 +2,19 @@
 
 ## Group Members
 
-- Nayeem (nayeemullahbaig.93@gmail.com)  
-- Andrew Holland (hollanaa@iu.edu)  
+:o2: hids missing 
+
+Added HIDs
+
+:o2: please define project in more detail, e.g. Nayeems project
+
+Please check PAM section and let us know your thoughts
+
+:o2: please note taht keys can just be added to authorized keys and pam may not be needed. Goal of pam is not properly described
+
+
+- Nayeem (nayeemullahbaig.93@gmail.com)  [fa19-516-172](https://github.com/cloudmesh-community/fa19-516-172)
+- Andrew Holland (hollanaa@iu.edu)   [fa19-516-144](https://github.com/cloudmesh-community/fa19-516-144)
 
 ## Introduction
 
@@ -44,6 +55,8 @@ can automate the generation, storage, and access of the keys and config.
 
 1. Add pam\_ssh capabilities to control access to ssh-add
 
+Thinking of adding another layer of authentication using PAM. Let us know your thoughts on it.
+
 
 ## Proposed Software to Integrate into Project
 
@@ -55,3 +68,37 @@ can automate the generation, storage, and access of the keys and config.
 
 * Elliptic Curve Cryptography  
 * Advanced Encryption Standard Galois Counter Mode (AES-GCM)
+
+## Workbreakdown
+
+[Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
+
+## Progress
+
+### Week of Monday Oct. 07th
+
+#### Andrew
+
+1. Forked cloudmesh-cloud to local repo  
+    1. fork located [here](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
+1. Edited cms key --source=FILEPATH to now parse filepath argument  
+    1. Within [key-group branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/key-group>)  
+1. Investigating how to add new local-keygroup collection to database  
+1. Installed robo3t to observe changes to local mongodb  
+
+### Week of Monday Sep. 30th 
+
+#### Andrew
+
+1. Researched password managers for future integration discovered  
+	1. [kpcli](<http://kpcli.sourceforge.net/>)  
+	2. [gopass](<https://www.gopass.pw/>)  
+	3. [kedpm](<http://kedpm.sourceforge.net/>)  
+	4. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)  
+1. Submitted PR for debian 9 installation of mongo  
+1. Installed docker on local system to ease testing
+1. Began audit of cms-cloud/cms/security/encrypt.py-bug check /project/audit.md
+1. Took second pass look through the encrypt.py-bug. Wrote questions for Gregor  
+
+## References
+
