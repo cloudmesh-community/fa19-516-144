@@ -1,49 +1,40 @@
-# Introduce Encryption Functionality for Cloudmesh Configuration File
+# General Security Improvements and Introducing Key Managment for Cloudmesh  
 
 ## Group Members
 
-- Nayeem (nayeemullahbaig.93@gmail.com)  
-- Andrew Holland (hollanaa@iu.edu)  
+- 172: Nayeem (nayeemullahbaig.93@gmail.com)  
+- 144: Andrew Holland (hollanaa@iu.edu)  
 
 ## Introduction
 
-Increase the security capabilities of Cloudmesh be encrypting the cloudmesh.yaml  
-file. Currently the configuration file is left in plaintext thus leaving  
-passwords to chameleon cloud and mongodb vulnerable to any malicious user that  
-gains access to the machine the file is hosted on. Encrypting the config file  
-decreases the attack surface.   
+The Cloudmesh project lacks certain security capabilities and secure coding  
+practices. General improvements are required to address three primary concerns.  
 
-This project will also attempt to integrate capabilities to manage the  
-passwords within a password manager such as Keepass. If successful Cloudmesh  
+First, the code base requireds a general audit on all files using openssl.  
+Currently two files are responsible for the security protocols and usage of  
+openssl. Namely the cloudmesh-cloud/cloudmesh/security/encrypt.py and   
+cloudmesh-cloud/cms/management/configuration/security/encryption.py files.  
+These files require a full audit and update to use well-defined modules.   
+
+Second, security related configuration files require obscuring secrets.  
+Presently the cloudmesh.yaml file responsible for configuring Cloudmesh has all
+data presented in clear-text. The ```cms config cat less``` command obscures
+the passwords within the config file, but only for the screen. Any malicious
+user with read access to the file would be able to extract all passwords
+set within Cloudmesh. The config file should encrypt the password bytes by 
+default to decrease the attack surface on Cloudmesh. 
+
+Finally, the management of keys need to be automated and integrated with mongoDB.  
+Cloudmesh is missing functionality to easily add keys and control the access  
+policies related to key management. Functionality to utilize mongo DB have  
+already been developed for the Security Rules and Security Groups functions.  
+We can add Key Groups that are defined by both the related cloud provider and  
+collection of related keys to fine tune access control for all connected machines.   
+
+After addressing the primary concerns Cloudmesh will be capable of being
+further extended to integrate password managers directly into secrets
+management. This could include software such as Keepass. If successful, Cloudmesh  
 can automate the generation, storage, and access of the keys and config.  
-
-## Planned Implementation
-
-### Goal 1: Encryption of Yaml File
-
-1. Add location: "PATH\_TO\_FILE" section in first line
-2. Add cloudmesh: configs below
-3. Write python script to encrypt using AES-GCM with ECC key
-
-### Goal 2: Integrate File into Keepass
-
-1. Investigate using Keepass or other password manager's command line interfaces
-2. Create script to take the location information, follow it and decrypt config
-
-### Goal 3: Add Integrity Checks for Config File
-
-1. Simplify library calls for encryption and decryption of config file
-2. Modify encryption to use location within integrity check
-3. Add library calls to modify location
-
-### Goal 4: Update All Cloudmesh commands that access Config File
-
-1. Update all Cloudmesh manipulations of config file to use new library
-
-### Goal 5: Harden access to SSH
-
-1. Add pam\_ssh capabilities to control access to ssh-add
-
 
 ## Proposed Software to Integrate into Project
 
@@ -56,11 +47,51 @@ can automate the generation, storage, and access of the keys and config.
 * Elliptic Curve Cryptography  
 * Advanced Encryption Standard Galois Counter Mode (AES-GCM)
 
+## References
+
+## Tasks
+
+### Openssl Security Audit  
+
+Task Lead: Andrew  
+Status: In Progress 
+
+Last Update: Audited cloudmesh-cloud/cloudmesh/security/encrypt.py  
+
+### Encrypting Cloudmesh.yaml Secrets  
+
+Task Lead: Andrew    
+Status: Pending 
+
+Last Update:   
+
+### CMS Key Command
+
+Task Lead: Nayeem    
+Status: In Progress   
+
+Last Update: Implemented ``` cms key add --source=FILE_PATH ```
+
+### CMS KeyGroup Command
+
+Task Lead: Nayeem   
+Status: In Progress   
+
+Last Update: Added KeyGroup.py file based on SecGroup.py   
+
 ## Workbreakdown
 
 [Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
 
 ## Progress
+
+### Week of Monday Oct. 14th
+
+#### Andrew
+
+1. Created the KeyGroup.py file to handle key groups  
+    1. Need to investigate the purpose of SecGroup.output  
+1. Designed queries
 
 ### Week of Monday Oct. 07th
 
@@ -86,6 +117,4 @@ can automate the generation, storage, and access of the keys and config.
 1. Installed docker on local system to ease testing
 1. Began audit of cms-cloud/cms/security/encrypt.py-bug check /project/audit.md
 1. Took second pass look through the encrypt.py-bug. Wrote questions for Gregor  
-
-## References
 
