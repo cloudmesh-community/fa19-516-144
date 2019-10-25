@@ -94,6 +94,7 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 1. Discussed cms key and cms keygroup commands with partner. 
 1. Updated project.md to address concerns related to portners project. 
 1. Added inital writings for book chapters within the /project/chapters dir
+1. Added initial encryptor and pem_handler to replace old encrypt.py
 
 ### Week of Monday Oct. 14th
 
