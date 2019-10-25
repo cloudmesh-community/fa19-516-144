@@ -2,6 +2,18 @@
 
 Updated: Oct. 03 2019  
 
+## Risk Analysis
+
+### Low Risk Threats  
+
+1. Using path\_expand within formated string. May allow arbitrary injection.
+
+### Mediuem Risk Threats
+
+1. Using AES Ciphr Block Chaining mode for encryption. If unreplaced and  
+improper messaging is introduced all security gurantees are lost due to the  
+padding oracle attack.  
+
 ## General Notes and Analysis
 
 
@@ -56,8 +68,6 @@ Updated: Oct. 03 2019
 
 ## Analysis: cloudmesh-cloud/cms/management/configuration/security/encryption.py
 
-1. Current
-
 ### General Notes
 
 1. Passwords are written to files. They should either be stored in some type of
@@ -68,17 +78,44 @@ attacks. Using aes-gcm avoids risk and introduces integrity and auth checks.
 1. Could avoid the randomKey function if using ECC key derivation. 
 1. ssh-keygen is destructive if id\_rsa already exists. Should use path args. 
 1. Missing verification of public and private keys on cert  
-1. 
 
 ### Notes on Functions
 
+1. \_\_init\_\_()  
+	1. Should be a general encryptor that takes security parameters as  
+arguments instead of files. Files bytes should be passed to the 'encrypt'
+function.  
+1. \_execute()  
+	1. This function should be replaced by calling cloudmesh's Shell module  
 1. getPublicKey()  
     1. Assuming cert is X.509 you can use pyca to extract the key
+1. getRandomPassword()  
+	1. Random passwords should be generated using os.urandom() provided by python.  
+1. encrypt()  
+	1. Should use library such as py cryptography instead of os call
+	1. path\_expand appears redundant
+	1. Using AES-cbc (vulnerable to padding oracle attack)
+1. encryptPassword()  
+	1. Should encrypt on bytes instead of using os command  
+1. decryptRandomKey()  
+	1. similar to encryptPassword()
+1. ssh\_keygen()  
+	1. Only uses the default 'id\_rsa' name. Since the operation is  
+destructive users may unintentionally lose an ssh key. Should allow setting  
+name and path.   
+1. pem\_create()  
+	1. Should use a standard module to generate the pem file.  
 1. pem\_verify(): attempts to verify cert chain of trust  
-    1. Issue unde investigation
+	1. Should use pyca load pem file function which fails on invalid pem
 1. check\_key(): checking if private key is in PEM format  
-    1. could use pyca's load pem functions which already has checks
-
-### Open Questions
-
-
+	1. Check key has no verification except for the standard tag  
+	1. Should use pyca load pem file to actually verify format  
+1. decrypt()
+	1. Calls should be made to well defined module such as pyca
+	1. If openssl is required the redundant path\_expand should be removed.  
+1. edit()  
+	1. Out of scope for encryption class. Should use actualy command instead. 
+1. mkdir()  
+	1. Shell.mkdir does not set access rights
+1. if \_\_name\_\_ call  
+	1. Should only use encryption class as module call initialized by other classes.  
