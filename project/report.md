@@ -18,7 +18,7 @@ These files require a full audit and update to use well-defined modules.
 
 Second, security related configuration files require obscuring secrets.  
 Presently the cloudmesh.yaml file responsible for configuring Cloudmesh has all  
-data presented in clear-text. The ```cms config cat less``` command obscures  
+data presented in clear-text. The ``` cms config cat less ``` command obscures  
 the passwords within the config file, but only for the screen. Any malicious  
 user with read access to the file would be able to extract all passwords  
 set within Cloudmesh. The config file should encrypt the password bytes by   
