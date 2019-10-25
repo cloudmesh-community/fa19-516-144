@@ -2,8 +2,16 @@
 
 ## Group Members
 
-- 172: Nayeem (nayeemullahbaig.93@gmail.com)  
-- 144: Andrew Holland (hollanaa@iu.edu)  
+- Andrew Holland  
+	- repo: [fa19-516-144](<"https://github.com/cloudmesh-community/fa19-516-144/tree/master">)  
+	- email: hollanaa@iu.edu  
+- Nayeem Baig  
+	- email: nayeemullahbaig.93@gmail.com  
+	- repo: [fa19-516-172]("https://github.com/cloudmesh-community/fa19-516-172/tree/master">)  
+
+## Workbreakdown
+
+[Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
 
 ## Introduction
 
@@ -78,10 +86,6 @@ Task Lead: Nayeem
 Status: In Progress   
 
 Last Update: Added KeyGroup.py file based on SecGroup.py   
-
-## Workbreakdown
-
-[Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
 
 ## Progress
 
