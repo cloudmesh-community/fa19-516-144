@@ -17,12 +17,12 @@ cloudmesh-cloud/cms/management/configuration/security/encryption.py files.
 These files require a full audit and update to use well-defined modules.   
 
 Second, security related configuration files require obscuring secrets.  
-Presently the cloudmesh.yaml file responsible for configuring Cloudmesh has all
-data presented in clear-text. The ```cms config cat less``` command obscures
-the passwords within the config file, but only for the screen. Any malicious
-user with read access to the file would be able to extract all passwords
-set within Cloudmesh. The config file should encrypt the password bytes by 
-default to decrease the attack surface on Cloudmesh. 
+Presently the cloudmesh.yaml file responsible for configuring Cloudmesh has all  
+data presented in clear-text. The ```cms config cat less``` command obscures  
+the passwords within the config file, but only for the screen. Any malicious  
+user with read access to the file would be able to extract all passwords  
+set within Cloudmesh. The config file should encrypt the password bytes by   
+default to decrease the attack surface on Cloudmesh.   
 
 Finally, the management of keys need to be automated and integrated with mongoDB.  
 Cloudmesh is missing functionality to easily add keys and control the access  
@@ -31,10 +31,10 @@ already been developed for the Security Rules and Security Groups functions.
 We can add Key Groups that are defined by both the related cloud provider and  
 collection of related keys to fine tune access control for all connected machines.   
 
-After addressing the primary concerns Cloudmesh will be capable of being
-further extended to integrate password managers directly into secrets
-management. This could include software such as Keepass. If successful, Cloudmesh  
-can automate the generation, storage, and access of the keys and config.  
+After addressing the primary concerns Cloudmesh will be capable of being  
+further extended to integrate password managers directly into secrets  
+management. This could include software such as Keepass. If successful,  
+Cloudmesh can automate the generation, storage, and access of the keys and config.  
 
 ## Proposed Software to Integrate into Project
 
