@@ -85,6 +85,15 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 
 ## Progress
 
+### Week of Monday Oct. 21st  
+
+#### Andrew
+
+1. Finished Analysis of openssl related files found [here](<https://github.com/cloudmesh-community/fa19-516-144/blob/audit/project/audit.md>)
+1. Established weekly meeting time with partner.  
+1. Discussed cms key and cms keygroup commands with partner. 
+1. Updated project.md to address concerns related to portners project. 
+
 ### Week of Monday Oct. 14th
 
 #### Andrew
