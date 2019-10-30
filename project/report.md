@@ -3,15 +3,16 @@
 ## Group Members
 
 - Andrew Holland  
-	- repo: [fa19-516-144](<"https://github.com/cloudmesh-community/fa19-516-144/tree/master">)  
-	- email: hollanaa@iu.edu  
+
+  - repo: [fa19-516-144](<"https://github.com/cloudmesh-community/fa19-516-144/tree/master">)  
+  - email: hollanaa@iu.edu  
+
 - Nayeem Baig  
-	- email: nayeemullahbaig.93@gmail.com  
-	- repo: [fa19-516-172]("https://github.com/cloudmesh-community/fa19-516-172/tree/master">)  
 
-## Workbreakdown
+  - email: nayeemullahbaig.93@gmail.com  
+  - repo: [fa19-516-172]("https://github.com/cloudmesh-community/fa19-516-172/tree/master">)  
 
-[Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
+* [Contributors](https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors)  
 
 ## Introduction
 
@@ -93,7 +94,7 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 
 #### Andrew
 
-1. Finished Analysis of openssl related files found [here](<https://github.com/cloudmesh-community/fa19-516-144/blob/audit/project/audit.md>)
+1. Finished Analysis of openssl related files found [here](https://github.com/cloudmesh-community/fa19-516-144/blob/audit/project/audit.md)
 1. Established weekly meeting time with partner.  
 1. Discussed cms key and cms keygroup commands with partner. 
 1. Updated project.md to address concerns related to portners project. 
@@ -105,7 +106,9 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 #### Andrew
 
 1. Created the KeyGroup.py file to handle key groups  
-    1. Need to investigate the purpose of SecGroup.output  
+
+   1. Need to investigate the purpose of SecGroup.output  
+
 1. Designed queries
 
 ### Week of Monday Oct. 07th
@@ -113,9 +116,13 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 #### Andrew
 
 1. Forked cloudmesh-cloud to local repo  
-    1. fork located [here](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
+   
+   1. fork located [here](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
+
 1. Edited cms key --source=FILEPATH to now parse filepath argument  
-    1. Within [key-group branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/key-group>)  
+
+   1. Within [key-group branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/key-group>)  
+
 1. Investigating how to add new local-keygroup collection to database  
 1. Installed robo3t to observe changes to local mongodb  
 
@@ -123,11 +130,13 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 
 #### Andrew
 
-1. Researched password managers for future integration discovered  
-	1. [kpcli](<http://kpcli.sourceforge.net/>)  
-	2. [gopass](<https://www.gopass.pw/>)  
-	3. [kedpm](<http://kedpm.sourceforge.net/>)  
-	4. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)  
+1. Researched password managers for future integration discovered 
+
+   1. [kpcli](<http://kpcli.sourceforge.net/>)  
+   1. [gopass](<https://www.gopass.pw/>)  
+   1. [kedpm](<http://kedpm.sourceforge.net/>)  
+   1. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)  
+
 1. Submitted PR for debian 9 installation of mongo  
 1. Installed docker on local system to ease testing
 1. Began audit of cms-cloud/cms/security/encrypt.py-bug check /project/audit.md
