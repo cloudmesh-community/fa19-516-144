@@ -106,7 +106,7 @@ Task Lead: Andrew
 Status: Pending   
 [Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit>)  
 
-Last Update: add get_path() to Config class to return yaml path to key
+Last Update: Add first test script for decryption and encryption  
 
 ### CMS Key Command
 
@@ -128,7 +128,12 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 
 #### Andrew  
 
-1. add get_path() function to Config() class to return yaml path(s) to key  
+1. add get_path() function to Config() class to return yaml dot path(s) to key  
+1. implemented means to get value from config given a dot path to key the get()  
+This was necessary since the Config.get() function couldn't handle dot paths.  
+1. Wrote script to begin testing encryption of config values
+1. Began integration into cloudmesh by testing Config.set with encrypted data
+
 
 ### Week of Monday Nov. 4th  
 
@@ -137,6 +142,7 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 1. Implemented asymmetric encryption using rsa  
 1. wrote script to demonstrate ssh-agent cannot be used with encryption   
 1. added README for running the scripts
+1. added CmsHasher class to hash data (can be used for unique file name generation)  
 
 ### Week of Monday Oct. 28th  
 
