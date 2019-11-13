@@ -13,6 +13,7 @@
   - repo: [fa19-516-172]("https://github.com/cloudmesh-community/fa19-516-172/tree/master">)  
 
 * [Contributors](https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors)  
+* [Forked Branch]("https://github.com/ElectricErudite/cloudmesh-cloud")
 
 ## Introduction
 
@@ -64,15 +65,17 @@ Cloudmesh can automate the generation, storage, and access of the keys and confi
 
 Task Lead: Andrew  
 Status: In Progress 
+[Forked Branch]("https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit")  
 
-Last Update: Audited cloudmesh-cloud/cloudmesh/security/encrypt.py  
+Last Update: Added symmetric and asymmetric encrytion to CmsEncryptor class 
 
 ### Encrypting Cloudmesh.yaml Secrets  
 
 Task Lead: Andrew    
-Status: Pending 
+Status: Pending   
+[Forked Branch]("https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit")  
 
-Last Update:   
+Last Update: add get_path() to Config class to return yaml path to key
 
 ### CMS Key Command
 
@@ -89,6 +92,28 @@ Status: In Progress
 Last Update: Added KeyGroup.py file based on SecGroup.py   
 
 ## Progress
+
+### Week of Monday Nov. 11th  
+
+#### Andrew  
+
+1. add get_path() function to Config() class to return yaml path(s) to key  
+
+### Week of Monday Nov. 4th  
+
+#### Andrew  
+
+1. Implemented asymmetric encrytion using rsa  
+1. wrote script to demonstrate ssh-agent cannot be used with encryption   
+1. added README for running the scripts
+
+### Week of Monday Oct. 28th  
+
+#### Andrew  
+
+1. Investigated using ssh-agent modules paramiko, and ssh2-python  
+1. Investigated ssh-agent documentation. Discovered use case is for signing only.  
+1. Implemented symmetric encryption using AES-GCM  
 
 ### Week of Monday Oct. 21st  
 

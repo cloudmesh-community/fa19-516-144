@@ -1,7 +1,5 @@
 # Cloudmesh Encryption Security Audit
 
-Updated: Oct. 03 2019  
-
 ## Risk Analysis
 
 ### Low Risk Threats  
