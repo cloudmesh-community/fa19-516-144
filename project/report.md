@@ -1,4 +1,4 @@
-# General Security Improvements and Introducing Key Managment for Cloudmesh  
+# General Security Improvements and Introducing Key Management for Cloudmesh  
 
 ## Group Members
 
@@ -20,7 +20,7 @@
 The Cloudmesh project lacks certain security capabilities and secure coding  
 practices. General improvements are required to address three primary concerns.  
 
-First, the code base requireds a general audit on all files using openssl.  
+First, the code base requires a general audit on all files using openssl.  
 Currently two files are responsible for the security protocols and usage of  
 openssl. Namely the cloudmesh-cloud/cloudmesh/security/encrypt.py and   
 cloudmesh-cloud/cms/management/configuration/security/encryption.py files.  
@@ -46,6 +46,37 @@ further extended to integrate password managers directly into secrets
 management. This could include software such as Keepass. If successful,  
 Cloudmesh can automate the generation, storage, and access of the keys and config.  
 
+## Implementation
+
+### Encrypting Cloudmesh.yaml  
+
+#### Automating Key Management
+
+##### SSH-Agent  
+
+Original plans included integrating ssh-agent to automatically retrieve  
+passwords for key operations (such as encryption). This goes against the  
+functionality of the SSH-Agent. As referenced in the IETF informational  
+documentation for ssh-agent found 
+[here](<"https://tools.ietf.org/html/draft-miller-ssh-agent-00#section-4.5">) 
+details that the agent should only  
+be used for signing data.  
+
+The ssh-agent is used to prove possession of the private key without exposing  
+the private bytes of the key. This is done by generating a public-private key  
+pair and sending the public key to the server. When you attempt to ssh to the  
+server it will request a signature of some random data. When you retrieve the  
+data you request the ssh-agent signs it and this signed data is sent back to  
+the server. Since the signature can be validated by the public key you prove  
+the private key is within your possession. Notice this is different than using  
+the actual key bytes.   
+
+To give a practical example of the agent being unable to provide private key  
+bytes we can reference the [ssh_agent demo directory](<"https://github.com/cloudmesh-community/fa19-516-144/tree/project/project/demo/ssh_agent">).  
+In short, we will use a public-private key pair to encrypt some data.  
+Even if the private key is added to the ssh-agent a password will be prompted.  
+Please read the README within the directory further explanation.  
+
 ## Proposed Software to Integrate into Project
 
 * Keepass(2)  
@@ -67,7 +98,7 @@ Task Lead: Andrew
 Status: In Progress 
 [Forked Branch]("https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit")  
 
-Last Update: Added symmetric and asymmetric encrytion to CmsEncryptor class 
+Last Update: Added symmetric and asymmetric encryption to CmsEncryptor class 
 
 ### Encrypting Cloudmesh.yaml Secrets  
 
@@ -103,7 +134,7 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 
 #### Andrew  
 
-1. Implemented asymmetric encrytion using rsa  
+1. Implemented asymmetric encryption using rsa  
 1. wrote script to demonstrate ssh-agent cannot be used with encryption   
 1. added README for running the scripts
 
@@ -122,8 +153,8 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 1. Finished Analysis of openssl related files found [here](https://github.com/cloudmesh-community/fa19-516-144/blob/audit/project/audit.md)
 1. Established weekly meeting time with partner.  
 1. Discussed cms key and cms keygroup commands with partner. 
-1. Updated project.md to address concerns related to portners project. 
-1. Added inital writings for book chapters within the /project/chapters dir
+1. Updated project.md to address concerns related to partner's project. 
+1. Added initial writings for book chapters within the /project/chapters dir
 1. Added initial encryptor and pem_handler to replace old encrypt.py
 
 ### Week of Monday Oct. 14th
