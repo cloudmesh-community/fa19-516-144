@@ -4,16 +4,16 @@
 
 - Andrew Holland  
 
-  - repo: [fa19-516-144](<"https://github.com/cloudmesh-community/fa19-516-144/tree/master">)  
+  - repo: [fa19-516-144](<https://github.com/cloudmesh-community/fa19-516-144/tree/master>)  
   - email: hollanaa@iu.edu  
 
 - Nayeem Baig  
 
   - email: nayeemullahbaig.93@gmail.com  
-  - repo: [fa19-516-172]("https://github.com/cloudmesh-community/fa19-516-172/tree/master">)  
+  - repo: [fa19-516-172](<https://github.com/cloudmesh-community/fa19-516-172/tree/master>)  
 
-* [Contributors](https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors)  
-* [Forked Branch]("https://github.com/ElectricErudite/cloudmesh-cloud")
+* [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)  
+* [Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud>)
 
 ## Introduction
 
@@ -58,7 +58,7 @@ Original plans included integrating ssh-agent to automatically retrieve
 passwords for key operations (such as encryption). This goes against the  
 functionality of the SSH-Agent. As referenced in the IETF informational  
 documentation for ssh-agent found 
-[here](<"https://tools.ietf.org/html/draft-miller-ssh-agent-00#section-4.5">) 
+[here](<https://tools.ietf.org/html/draft-miller-ssh-agent-00#section-4.5>) 
 details that the agent should only  
 be used for signing data.  
 
@@ -72,7 +72,7 @@ the private key is within your possession. Notice this is different than using
 the actual key bytes.   
 
 To give a practical example of the agent being unable to provide private key  
-bytes we can reference the [ssh_agent demo directory](<"https://github.com/cloudmesh-community/fa19-516-144/tree/project/project/demo/ssh_agent">).  
+bytes we can reference the [ssh_agent demo directory](<https://github.com/cloudmesh-community/fa19-516-144/tree/project/project/demo/ssh_agent>).  
 In short, we will use a public-private key pair to encrypt some data.  
 Even if the private key is added to the ssh-agent a password will be prompted.  
 Please read the README within the directory further explanation.  
@@ -96,7 +96,7 @@ Please read the README within the directory further explanation.
 
 Task Lead: Andrew  
 Status: In Progress 
-[Forked Branch]("https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit")  
+[Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit>)  
 
 Last Update: Added symmetric and asymmetric encryption to CmsEncryptor class 
 
@@ -104,7 +104,7 @@ Last Update: Added symmetric and asymmetric encryption to CmsEncryptor class
 
 Task Lead: Andrew    
 Status: Pending   
-[Forked Branch]("https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit")  
+[Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit>)  
 
 Last Update: add get_path() to Config class to return yaml path to key
 
@@ -150,7 +150,7 @@ Last Update: Added KeyGroup.py file based on SecGroup.py
 
 #### Andrew
 
-1. Finished Analysis of openssl related files found [here](https://github.com/cloudmesh-community/fa19-516-144/blob/audit/project/audit.md)
+1. Finished Analysis of openssl related files found [here](<https://github.com/cloudmesh-community/fa19-516-144/blob/audit/project/audit.md>)
 1. Established weekly meeting time with partner.  
 1. Discussed cms key and cms keygroup commands with partner. 
 1. Updated project.md to address concerns related to partner's project. 
