@@ -1,16 +1,9 @@
-# General Security Improvements and Introducing Key Management for Cloudmesh  
-
-## Group Members
+# Encryption of Cloud Secrets
 
 - Andrew Holland  
 
   - repo: [fa19-516-144](<https://github.com/cloudmesh-community/fa19-516-144/tree/master>)  
   - email: hollanaa@iu.edu  
-
-- Nayeem Baig  
-
-  - email: nayeemullahbaig.93@gmail.com  
-  - repo: [fa19-516-172](<https://github.com/cloudmesh-community/fa19-516-172/tree/master>)  
 
 * [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)  
 * [Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud>)
@@ -33,13 +26,6 @@ the passwords within the config file, but only for the screen. Any malicious
 user with read access to the file would be able to extract all passwords  
 set within Cloudmesh. The config file should encrypt the password bytes by   
 default to decrease the attack surface on Cloudmesh.   
-
-Finally, the management of keys need to be automated and integrated with mongoDB.  
-Cloudmesh is missing functionality to easily add keys and control the access  
-policies related to key management. Functionality to utilize mongo DB have  
-already been developed for the Security Rules and Security Groups functions.  
-We can add Key Groups that are defined by both the related cloud provider and  
-collection of related keys to fine tune access control for all connected machines.   
 
 After addressing the primary concerns Cloudmesh will be capable of being  
 further extended to integrate password managers directly into secrets  
@@ -107,20 +93,6 @@ Status: Pending
 [Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit>)  
 
 Last Update: Add first test script for decryption and encryption  
-
-### CMS Key Command
-
-Task Lead: Nayeem    
-Status: In Progress   
-
-Last Update: Implemented ``` cms key add --source=FILE_PATH ```
-
-### CMS KeyGroup Command
-
-Task Lead: Nayeem   
-Status: In Progress   
-
-Last Update: Added KeyGroup.py file based on SecGroup.py   
 
 ## Progress
 
