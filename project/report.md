@@ -80,36 +80,37 @@ Please read the README within the directory further explanation.
 
 ### Openssl Security Audit  
 
-Task Lead: Andrew  
-Status: In Progress 
 [Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit>)  
-
-Last Update: Added symmetric and asymmetric encryption to CmsEncryptor class 
 
 ### Encrypting Cloudmesh.yaml Secrets  
 
-Task Lead: Andrew    
-Status: Pending   
 [Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit>)  
-
-Last Update: Add first test script for decryption and encryption  
 
 ## Progress
 
+### Week of Monday Nov. 25th  
+
+1. Changed encoding of secrets from base64 to integers  
+1. Added cloudmesh.security section in cloudmesh.yaml default config  
+1. Added cloudmesh.security.secrets to use regexp to pick attributes for encryption  
+1. Implemented file reversion in case encryption or decryption fails  
+
+### Week of Monday Nov. 18th  
+
+1. Added writefd() to cloudmesh-common/util.py to allow writing permissions  
+1. Added wr only permissions to nonce and key files  
+
 ### Week of Monday Nov. 11th  
 
-#### Andrew  
-
-1. add get_path() function to Config() class to return yaml dot path(s) to key  
+1. add get\_path() function to Config() class to return yaml dot path(s) to key  
 1. implemented means to get value from config given a dot path to key the get()  
 This was necessary since the Config.get() function couldn't handle dot paths.  
-1. Wrote script to begin testing encryption of config values
-1. Began integration into cloudmesh by testing Config.set with encrypted data
-
+1. Wrote script to begin testing encryption of config values  
+1. Began integration into cloudmesh by testing Config.set with encrypted data  
+1. Added file permission argument to cloudmesh.common.util.writefile  
+1. Edited ```cms config encrypt``` to encrypt the config file  
 
 ### Week of Monday Nov. 4th  
-
-#### Andrew  
 
 1. Implemented asymmetric encryption using rsa  
 1. wrote script to demonstrate ssh-agent cannot be used with encryption   
@@ -118,26 +119,20 @@ This was necessary since the Config.get() function couldn't handle dot paths.
 
 ### Week of Monday Oct. 28th  
 
-#### Andrew  
-
 1. Investigated using ssh-agent modules paramiko, and ssh2-python  
 1. Investigated ssh-agent documentation. Discovered use case is for signing only.  
 1. Implemented symmetric encryption using AES-GCM  
 
 ### Week of Monday Oct. 21st  
 
-#### Andrew
-
 1. Finished Analysis of openssl related files found [here](<https://github.com/cloudmesh-community/fa19-516-144/blob/audit/project/audit.md>)
 1. Established weekly meeting time with partner.  
 1. Discussed cms key and cms keygroup commands with partner. 
 1. Updated project.md to address concerns related to partner's project. 
 1. Added initial writings for book chapters within the /project/chapters dir
-1. Added initial encryptor and pem_handler to replace old encrypt.py
+1. Added initial encryptor and pem\_handler to replace old encrypt.py
 
 ### Week of Monday Oct. 14th
-
-#### Andrew
 
 1. Created the KeyGroup.py file to handle key groups  
 
@@ -146,8 +141,6 @@ This was necessary since the Config.get() function couldn't handle dot paths.
 1. Designed queries
 
 ### Week of Monday Oct. 07th
-
-#### Andrew
 
 1. Forked cloudmesh-cloud to local repo  
    
@@ -162,8 +155,6 @@ This was necessary since the Config.get() function couldn't handle dot paths.
 
 ### Week of Monday Sep. 30th 
 
-#### Andrew
-
 1. Researched password managers for future integration discovered 
 
    1. [kpcli](<http://kpcli.sourceforge.net/>)  
@@ -175,4 +166,3 @@ This was necessary since the Config.get() function couldn't handle dot paths.
 1. Installed docker on local system to ease testing
 1. Began audit of cms-cloud/cms/security/encrypt.py-bug check /project/audit.md
 1. Took second pass look through the encrypt.py-bug. Wrote questions for Gregor  
-
