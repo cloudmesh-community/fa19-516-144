@@ -34,6 +34,43 @@ After addressing these tasks Cloudmesh users will be capable of having finer
 control over the security features of cloudmesh. This may also introduce  
 further security opportunities that could be addressed in the future.   
 
+## Process  
+
+### Installation  
+
+Assuming the following PRs are approved.   
+* [cms-cloud](<https://github.com/cloudmesh/cloudmesh-cloud/pull/245>)  
+* [cms-configuration](<https://github.com/cloudmesh/cloudmesh-configuration/pull/2>)  
+
+1. Install cloudmesh-cloud as directed in the cloudmesh v4 documentation  
+  - [documentation](<https://cloudmesh.github.io/cloudmesh-manual/installation/install.html>)  
+
+### Preperation  
+
+1. Generate an RSA public-private key pair using your favorite tool  
+1. Run ```cloudmesh config secinit```  
+1. Run ```cloudmesh config set cloudmesh.security.publickey=PATH```  
+  - Where PATH is the path to your RSA public key  
+1. Run ``cloudmesh config set cloudmesh.security.privatekey=PATH```  
+  - Where PATH is the path to your RSA private key  
+1. Edit the cloudmesh.yaml file with your favorite editor  
+  - Under the cloudmesh.security.secrets section add regular expressions to
+catch any secret you wish to encrypt. Reference the implementation section
+below for more details.  
+
+### Encryption  
+
+1. Run ```cloudmesh config encrypt```  
+  - Note: that the cloudmesh.version attribute should NOT be changed while the  
+    file is encrypted. Please reference the Special Cases section below.   
+
+### Decryption  
+
+1. Run ```cloudmesh config decrypt```  
+  - Enter the password for your private key when prompted.
+Hit enter if there is no password   
+
+
 ## Implementation
 
 ### Encrypting Cloudmesh.yaml  
@@ -65,18 +102,16 @@ In short, we will use a public-private key pair to encrypt some data.
 Even if the private key is added to the ssh-agent a password will be prompted.  
 Please read the README within the directory further explanation.  
 
-## Proposed Software to Integrate into Project
+## Special Cases
 
-* Keepass(2)  
-* python module: python cryptography  
-* ssh-keygen  
+### Upgrading Cloudmesh.yaml After Encrypting Attributes  
 
-## Related Concepts
+The cloudmesh.yaml version number is tied to the encryption of the data. If the
+version number is changed manually after the attributes are encrypted you will
+NOT be able to decrypt the data. This is used to future-proof Cloudmesh
+from attacks relaint on exploiting old version numbers. 
 
-* Elliptic Curve Cryptography  
-* Advanced Encryption Standard Galois Counter Mode (AES-GCM)
-
-## References
+Simply run ```cloudmesh config decrypt``` before upgrading your config file. 
 
 ## Tasks
 
