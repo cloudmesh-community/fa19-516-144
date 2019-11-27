@@ -131,6 +131,9 @@ Simply run ```cloudmesh config decrypt``` before upgrading your config file.
 1. Added cloudmesh.security section in cloudmesh.yaml default config  
 1. Added cloudmesh.security.secrets to use regexp to pick attributes for encryption  
 1. Implemented file reversion in case encryption or decryption fails  
+1. Created Pull Request for [cms-cloud](<https://github.com/cloudmesh/cloudmesh-cloud/pull/245>)  
+1. Created Pull Request for [cms-common](<https://github.com/cloudmesh/cloudmesh-common/pull/10>)  
+1. Created Pull Request for [cms-configuration](<https://github.com/cloudmesh/cloudmesh-configuration/pull/2>)  
 
 ### Week of Monday Nov. 18th  
 
