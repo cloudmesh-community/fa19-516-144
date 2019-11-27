@@ -8,29 +8,31 @@
 * [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)  
 * [Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud>)
 
-## Introduction
+## Introduction  
 
-The Cloudmesh project lacks certain security capabilities and secure coding  
-practices. General improvements are required to address three primary concerns.  
+The Cloudmesh project does not include the encryption of its secrets within the  
+cloudmesh.yaml file. This introduces major concers if the yaml file is  
+accidentally shared or if a malicious agent gets access to the local machine.  
+Either of these scenarios would mean the total exposure of all secrets the user  
+added to cloudmesh.  
 
-First, the code base requires a general audit on all files using openssl.  
-Currently two files are responsible for the security protocols and usage of  
-openssl. Namely the cloudmesh-cloud/cloudmesh/security/encrypt.py and   
-cloudmesh-cloud/cms/management/configuration/security/encryption.py files.  
-These files require a full audit and update to use well-defined modules.   
+The first major task is creating a series of general tools that can be used to  
+repalce the current EncryptFile class. The EncryptFile class only offers  
+encryption using the default name and a few openssl calls. The new suite should  
+be able to provide symmetric and assymmetric encryption, hashing, password  
+collection, key loading, and key verification. These features can all be added  
+by using trused modules such as python cryptography or 'pyca'.  
 
-Second, security related configuration files require obscuring secrets.  
-Presently the cloudmesh.yaml file responsible for configuring Cloudmesh has all  
-data presented in clear-text. The ``` cms config cat less ``` command obscures  
-the passwords within the config file, but only for the screen. Any malicious  
-user with read access to the file would be able to extract all passwords  
-set within Cloudmesh. The config file should encrypt the password bytes by   
-default to decrease the attack surface on Cloudmesh.   
+The second task involves updating the current ```cms config encrypt``` and  
+```cms config decrypt``` commands that can take the new suite's tools and  
+encrypt the specific attributes that should be kept secret. This will also  
+require introducing a new section to the cloudmesh.yaml file that controls  
+security and some customizable way for users to decide which attributes should  
+be encrypted.   
 
-After addressing the primary concerns Cloudmesh will be capable of being  
-further extended to integrate password managers directly into secrets  
-management. This could include software such as Keepass. If successful,  
-Cloudmesh can automate the generation, storage, and access of the keys and config.  
+After addressing these tasks Cloudmesh users will be capable of having finer  
+control over the security features of cloudmesh. This may also introduce  
+further security opportunities that could be addressed in the future.   
 
 ## Implementation
 
