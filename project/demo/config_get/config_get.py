@@ -6,6 +6,7 @@ from cloudmesh.common.console import Console
 from cloudmesh.configuration.Config import Config
 from cloudmesh.common.util import banner
 from pprint import pprint
+from cloudmesh.common.debug import VERBOSE
 
 config = Config()
 
@@ -20,11 +21,24 @@ pprint(q)
 banner("Demonstration Using get()", color = "BLUE")
 
     
-    
 for path in ["cloudmesh.version", "cloudmesh.profile"]: # default.group was not in my yaml
     Console.ok(f"Test Path: {path}")
     for value in [config.get(path), config[path]]:
         Console.ok(f"res type: {type(value)}")
-        Console.ok(f"result: {value}\n")
+        VERBOSE(value)
 
+for path in ["cloudmesh.doesnotexist"]:
+    Console.ok(f"Test Path: {path}")
+    try:
+        value = config.get(path, default="Hallo")
+        Console.ok(f"res type: {type(value)}")
+        VERBOSE(value)
+    except:
+        Console.error("failed to read")
 
+    try:
+        value = config[path]
+        Console.ok(f"res type: {type(value)}")
+        VERBOSE(value)
+    except:
+        Console.error("failed to read")
