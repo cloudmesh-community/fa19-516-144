@@ -1,9 +1,8 @@
 # Encryption of Cloud Secrets
 
-- Andrew Holland  
-
-  - repo: [fa19-516-144](<https://github.com/cloudmesh-community/fa19-516-144/tree/master>)  
-  - email: hollanaa@iu.edu  
+* Andrew Holland (hollanaa@iu.edu)   [fa19-516-144](https://github.com/cloudmesh-community/fa19-516-144)
+* repo: [fa19-516-144](<https://github.com/cloudmesh-community/fa19-516-144/tree/master>)  
+* email: hollanaa@iu.edu  
 
 * [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)  
 * [fork cms-cloud](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
@@ -66,6 +65,7 @@ below for more details.
   - Note: that the cloudmesh.version attribute should NOT be changed while the  
     file is encrypted. Please reference the Special Cases section below.   
 
+
 ### Decryption  
 
 1. Run ```cloudmesh config decrypt```  
@@ -76,6 +76,24 @@ Hit enter if there is no password
 
 ### Cloudmesh.Security Section  
 
+* Elliptic Curve Cryptography  
+* Advanced Encryption Standard Galois Counter Mode (AES-GCM)
+
+## Workbreakdown
+
+[Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
+
+## Progress
+
+### Week of Monday Oct. 07th
+
+#### Andrew
+
+1. Forked cloudmesh-cloud to local repo  
+    1. fork located [here](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
+1. Edited cms key --source=FILEPATH to now parse filepath argument  
+    1. Within [key-group branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/key-group>)  
+=======
 The cloudmesh.security section was added to allow users to control encryption.  
 In the current implementation the security section has four noteworthy attributes.  
 
@@ -312,11 +330,19 @@ This was necessary since the Config.get() function couldn't handle dot paths.
 
    1. Within [key-group branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/key-group>)  
 
+
 1. Investigating how to add new local-keygroup collection to database  
 1. Installed robo3t to observe changes to local mongodb  
 
 ### Week of Monday Sep. 30th 
 
+#### Andrew
+
+1. Researched password managers for future integration discovered  
+	1. [kpcli](<http://kpcli.sourceforge.net/>)  
+	2. [gopass](<https://www.gopass.pw/>)  
+	3. [kedpm](<http://kedpm.sourceforge.net/>)  
+	4. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)  
 1. Researched password managers for future integration discovered 
 
    1. [kpcli](<http://kpcli.sourceforge.net/>)  
@@ -324,7 +350,11 @@ This was necessary since the Config.get() function couldn't handle dot paths.
    1. [kedpm](<http://kedpm.sourceforge.net/>)  
    1. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)  
 
+
 1. Submitted PR for debian 9 installation of mongo  
 1. Installed docker on local system to ease testing
 1. Began audit of cms-cloud/cms/security/encrypt.py-bug check /project/audit.md
 1. Took second pass look through the encrypt.py-bug. Wrote questions for Gregor  
+
+
+## References
