@@ -72,9 +72,7 @@ Hit enter if there is no password
 
 ## Implementation
 
-### Encrypting Cloudmesh.yaml Attributes  
-
-#### Cloudmesh.Security Section  
+### Cloudmesh.Security Section  
 
 The cloudmesh.security section was added to allow users to control encryption.  
 In the current implementation the security section has four noteworthy attributes.  
@@ -96,7 +94,7 @@ To be explicit, you should review the expressions to ensure they meet your
 security needs before encrypting the config file. The current implementation  
 will **only** encrypt the attributes that the regular expressions detail.  
 
-The first expression is: *.AZURE_SECRET_KEY  
+The first expression is: \*\.AZURE_SECRET_KEY  
 This expression will encrypt all paths that end with AZURE_SECRET_KEY.  
 
 The second expression: cloudmesh.comet.endpoints.dev.userpass.password  
@@ -107,13 +105,13 @@ devestating example.
 
 ##### Matching More Cases Than Intended  
 
-By the definition of re the '.' symbol matches any single character.  
-Under most practical circumstance this should match on a literal '.' character  
+By the definition of re the '\.' symbol matches any single character.  
+Under most practical circumstance this should match on a literal '\.' character  
 since all paths in the cloudmesh.yaml config are presented as dotpaths.  
 Due to these design choices it is technically possible for the expressions   
 to encrypt more values than intended.  
 
-Example) regexp = '.*security.secrets.foo'  
+Example) regexp = '\.\*security\.secrets\.foo'  
 
 Let us have somewhere in cloudmesh.yaml the following  
 
@@ -122,16 +120,16 @@ security:
     foo: bar  
   secretsXfoo: baz   
 
-Both bar and baz can be encrypted since the re '.' can match on both the  
-literal '.' and the character 'X'.   
+Both bar and baz can be encrypted since the re '\.' can match on both the  
+literal '\.' and the character 'X'.   
  
 ##### Encrypting Data Necessary to Decrypt  
 
 There are currently no safeguards to prevent encryption of data neccessary to  
-decrypt the config attributes. If you encrypt the cloudmesh.version or **any**    
+decrypt the config attributes. If you encrypt the cloudmesh\.version or **any**    
 attribute under the cloudmesh.security section decryption is **not** guranteed.    
 
-Expample: regexp = '.\*sec.\*'  
+Expample: regexp = '\.\*sec\.\*'  
 
 Let us also have the default cloudmesh.yaml file.    
 
@@ -143,9 +141,73 @@ are encrypted then the command wouldn't know where the private key is located
 or where the nonces and aes-gcm keys are located. Either case would be  
 catastrophic since the attributes you encrypted would be unattainable.   
 
-#### Automating Key Management
+### Cloudmesh Tools for Encryption  
 
-##### SSH-Agent  
+#### CmsEncryptor  
+
+The CmsEncryptor class is a general encryptor tool used for both symmetric and
+assymmetric encryption schemes. Currently RSA and AES-GCM encryption schemes
+are the only available schemes for encryption. This is used to take bytes of
+data and return the encrypted bytes with other data if necessary.  
+
+#### CmsHasher  
+
+The CmsHasher class is used for hashing techniques. Currently SHA256 and MD5  
+are supported. Note MD5 is an **insecure** hashing tool. It should only be  
+used when you are absolutely sure that the data being hashed does not need to  
+be kept secret. The default and recommended hashing tool is SHA256.  
+
+#### KeyLoader  
+
+The KeyLoader class is responsible for opening and verifying the format of a
+given key file. Some variety of keys and formats are supported. Currently
+private keys can have PKCS8 or OpenSSL format and Public keys can have Subject
+Info or OpenSSH formats. Both PEM and SSH encoding is supported. It can open
+both passwordless and password-protected private key files.  
+
+### Encrypting and Decrypting Cloudmesh Attributes  
+
+#### Process for Encryption
+
+1. Copy the contents of the config into a secure temporary file  
+  - If at any time an error occurs the original config file is restored   
+1. The cloudmesh.security.secpath value is queried from the config  
+1. Load the key whose path is referenced in cloudmesh.security.publickey
+1. For each regular expression, apply it on all paths of the config file  
+1. For each applied path, get the value and hash the full path
+1. Encrypt the value with CmsEncryptor using AES-GCM  
+1. Take the generated key, generated, nonce, and ciphertext  
+1. Encrypt the nonce and key with CmsEncryptor using RSA  
+1. Store an integer encoding of the ciphertext in the cloudmesh config  
+1. Store the encrypted key and nonce in separate files with the hash as base name  
+1. Delete the temporary file
+
+#### Process for Decryption  
+
+1. Copy the contents of the config into a secure temporary file
+  - If at any time an error occurs the original config file is restored   
+1. Query the config for the value of cloudmesh.security.secpath  
+1. Load the key whose path is referenced in cloudmesh.security.privatekey  
+1. For each regular expression, apply it on all paths of the config file  
+1. For each applied path produce the hash and load the nonce and key  
+1. Decrypt the nonce and key with CmsEncryptor using RSA  
+1. Get the ciphertext from the config down the full path  
+1. Decrypt the ciphertext using the key, nonce, and cloudmesh.version number
+1. Set the path attribute with the plaintext  
+1. Delete the files with hash as base name in the secpath directory  
+1. Delete the temporary file
+
+#### Key Management
+
+#### Keys Used in Encryption  
+
+There are two keys used for encryption and decryption. The symmetric key which
+is an AES-256 key that is automatically generated by CmsEncryptor and the
+private-public RSA key pair generated by the user. 
+
+The RSA key should be in PEM format, with 2048 bits. 
+
+##### Attempt to Automate with SSH-Agent
 
 Original plans included integrating ssh-agent to automatically retrieve  
 passwords for key operations (such as encryption). This goes against the  
