@@ -70,10 +70,78 @@ below for more details.
   - Enter the password for your private key when prompted.
 Hit enter if there is no password   
 
-
 ## Implementation
 
-### Encrypting Cloudmesh.yaml  
+### Encrypting Cloudmesh.yaml Attributes  
+
+#### Cloudmesh.Security Section  
+
+The cloudmesh.security section was added to allow users to control encryption.  
+In the current implementation the security section has four noteworthy attributes.  
+
+1. publickey: The path to the public key used to encrypt the attributes  
+1. privatekey: The path to the private key used to decrypt the attributes  
+  - This must be the private key-paired with the public key  
+1. secpath: This is the operating system path that will hold keys and nonces  
+1. secrets: A list of regular expressions to select which attributes to encrypt  
+
+#### Selecting the Attributes  
+
+The secrets section is inteded for users to add python regular expressions.  
+To learn the specifics about regular expression please reference the 
+[documentation](<https://docs.python.org/3.7/library/re.html>)  
+
+Inside the default config files exisits two expressions to start the process.  
+To be explicit, you should review the expressions to ensure they meet your  
+security needs before encrypting the config file. The current implementation  
+will **only** encrypt the attributes that the regular expressions detail.  
+
+The first expression is: *.AZURE_SECRET_KEY  
+This expression will encrypt all paths that end with AZURE_SECRET_KEY.  
+
+The second expression: cloudmesh.comet.endpoints.dev.userpass.password  
+This expression will encrypt the attribute at the end of the path.  
+Please note that the regular expressions must be crafted with care.  
+We will begin with a simple benign example but then proceed to show a more  
+devestating example.  
+
+##### Matching More Cases Than Intended  
+
+By the definition of re the '.' symbol matches any single character.  
+Under most practical circumstance this should match on a literal '.' character  
+since all paths in the cloudmesh.yaml config are presented as dotpaths.  
+Due to these design choices it is technically possible for the expressions   
+to encrypt more values than intended.  
+
+Example) regexp = '.*security.secrets.foo'  
+
+Let us have somewhere in cloudmesh.yaml the following  
+
+security:  
+  secrets:  
+    foo: bar  
+  secretsXfoo: baz   
+
+Both bar and baz can be encrypted since the re '.' can match on both the  
+literal '.' and the character 'X'.   
+ 
+##### Encrypting Data Necessary to Decrypt  
+
+There are currently no safeguards to prevent encryption of data neccessary to  
+decrypt the config attributes. If you encrypt the cloudmesh.version or **any**    
+attribute under the cloudmesh.security section decryption is **not** guranteed.    
+
+Expample: regexp = '.\*sec.\*'  
+
+Let us also have the default cloudmesh.yaml file.    
+
+This expression could match on both 'cloudmesh.security' and  
+'cloudmesh.security.secrets'. Since it matches all paths with 'sec' in it.    
+If the secrets are encrypted then the ```cloudmesh config decrypt``` command  
+cannot know which expressions to decrypt. If the other attributes of security  
+are encrypted then the command wouldn't know where the private key is located  
+or where the nonces and aes-gcm keys are located. Either case would be  
+catastrophic since the attributes you encrypted would be unattainable.   
 
 #### Automating Key Management
 
