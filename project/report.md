@@ -6,7 +6,9 @@
   - email: hollanaa@iu.edu  
 
 * [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)  
-* [Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud>)
+* [fork cms-cloud](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
+* [fork cms-common](<https://github.com/ElectricErudite/cloudmesh-common>)  
+* [fork cms-config](<https://github.com/ElectricErudite/cloudmesh-configuration>)  
 
 ## Introduction  
 
@@ -242,16 +244,6 @@ NOT be able to decrypt the data. This is used to future-proof Cloudmesh
 from attacks relaint on exploiting old version numbers. 
 
 Simply run ```cloudmesh config decrypt``` before upgrading your config file. 
-
-## Tasks
-
-### Openssl Security Audit  
-
-[Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit>)  
-
-### Encrypting Cloudmesh.yaml Secrets  
-
-[Forked Branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/audit>)  
 
 ## Progress
 
