@@ -77,11 +77,11 @@ Hit enter if there is no password
 ### Cloudmesh.Security Section  
 
 The cloudmesh.security section was added to allow users to control encryption.  
-In the current implementation the security section has four noteworthy attributes.  
+In the current implementation the security section has five noteworthy attributes.  
 
 1. publickey: The path to the public key used to encrypt the attributes  
 1. privatekey: The path to the private key used to decrypt the attributes  
-  - This must be the private key-paired with the public key  
+This must be the private key-paired with the public key  
 1. secpath: This is the operating system path that will hold keys and nonces  
 1. secrets: A list of regular expressions to select which attributes to encrypt  
 1. exceptions: A list of regular expressions to select attribute to **not** encrypt  
@@ -124,6 +124,8 @@ path attribute will **not** be encrypted.
 
 ### Cloudmesh Tools for Encryption  
 
+All tools are located within [encrypt.py](<https://github.com/cloudmesh/cloudmesh-configuration/blob/master/cloudmesh/configuration/security/encrypt.py>)   
+
 #### CmsEncryptor  
 
 The CmsEncryptor class is a general encryptor tool used for both symmetric and
@@ -148,10 +150,10 @@ both passwordless and password-protected private key files.
 
 ### Encrypting and Decrypting Cloudmesh Attributes  
 
-#### Process for Encryption
+#### Internal Process for Encryption
 
 1. Copy the contents of the config into a secure temporary file  
-  - If at any time an error occurs the original config file is restored   
+If at any time an error occurs the original config file is restored   
 1. The cloudmesh.security.secpath value is queried from the config  
 1. Load the key whose path is referenced in cloudmesh.security.publickey
 1. For each regular expression, apply it on all paths of the config file  
@@ -163,10 +165,10 @@ both passwordless and password-protected private key files.
 1. Store the encrypted key and nonce in separate files with the hash as base name  
 1. Delete the temporary file
 
-#### Process for Decryption  
+#### Internal Process for Decryption  
 
-1. Copy the contents of the config into a secure temporary file
-  - If at any time an error occurs the original config file is restored   
+1. Copy the contents of the config into a secure temporary file  
+If at any time an error occurs the original config file is restored   
 1. Query the config for the value of cloudmesh.security.secpath  
 1. Load the key whose path is referenced in cloudmesh.security.privatekey  
 1. For each regular expression, apply it on all paths of the config file  
