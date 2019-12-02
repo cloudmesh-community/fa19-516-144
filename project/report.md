@@ -13,17 +13,17 @@
 ## Introduction  
 
 The Cloudmesh project does not include the encryption of its secrets within the  
-cloudmesh.yaml file. This introduces major concers if the yaml file is  
+cloudmesh.yaml file. This introduces major concerns if the yaml file is  
 accidentally shared or if a malicious agent gets access to the local machine.  
 Either of these scenarios would mean the total exposure of all secrets the user  
 added to cloudmesh.  
 
 The first major task is creating a series of general tools that can be used to  
-repalce the current EncryptFile class. The EncryptFile class only offers  
+replace the current EncryptFile class. The EncryptFile class only offers  
 encryption using the default name and a few openssl calls. The new suite should  
-be able to provide symmetric and assymmetric encryption, hashing, password  
+be able to provide symmetric and asymmetric encryption, hashing, password  
 collection, key loading, and key verification. These features can all be added  
-by using trused modules such as python cryptography or 'pyca'.  
+by using trusted modules such as python cryptography or 'pyca'.  
 
 The second task involves updating the current ```cms config encrypt``` and  
 ```cms config decrypt``` commands that can take the new suite's tools and  
@@ -40,31 +40,27 @@ further security opportunities that could be addressed in the future.
 
 ### Installation  
 
-Assuming the following PRs are approved.   
-* [cms-cloud](<https://github.com/cloudmesh/cloudmesh-cloud/pull/245>)  
-* [cms-configuration](<https://github.com/cloudmesh/cloudmesh-configuration/pull/2>)  
+1. Install cloudmesh-cloud as directed in the cloudmesh v4 [documentation](<https://cloudmesh.github.io/cloudmesh-manual/installation/install.html>)  
 
-1. Install cloudmesh-cloud as directed in the cloudmesh v4 documentation  
-  - [documentation](<https://cloudmesh.github.io/cloudmesh-manual/installation/install.html>)  
-
-### Preperation  
+### Preparation  
 
 1. Generate an RSA public-private key pair using your favorite tool  
+  * One option includes openssl  
+    * Run ```openssl genrsa -aes256 -out PRV_NAME 2048```  
+    * Then run ```openssl rsa -in PRV_NAME -pubout -out PUB_NAME```  
 1. Run ```cloudmesh config secinit```  
 1. Run ```cloudmesh config set cloudmesh.security.publickey=PATH```  
   - Where PATH is the path to your RSA public key  
 1. Run ``cloudmesh config set cloudmesh.security.privatekey=PATH```  
   - Where PATH is the path to your RSA private key  
 1. Edit the cloudmesh.yaml file with your favorite editor  
-  - Under the cloudmesh.security.secrets section add regular expressions to
-catch any secret you wish to encrypt. Reference the implementation section
+  - Under the cloudmesh.security.secrets section add regular expressions to  
+catch any secret you wish to encrypt. Reference the implementation section  
 below for more details.  
 
 ### Encryption  
 
 1. Run ```cloudmesh config encrypt```  
-  - Note: that the cloudmesh.version attribute should NOT be changed while the  
-    file is encrypted. Please reference the Special Cases section below.   
 
 ### Decryption  
 
@@ -87,11 +83,13 @@ In the current implementation the security section has four noteworthy attribute
 
 #### Selecting the Attributes  
 
-The secrets section is inteded for users to add python regular expressions.  
+The cloudmesh.security.secrets section is intended for users to add python regular  
+expressions. These expressions are used to capture every attribute the user  
+wishes to encrypt.  
 To learn the specifics about regular expression please reference the 
-[documentation](<https://docs.python.org/3.7/library/re.html>)  
+[python re 3.7 documentation](<https://docs.python.org/3.7/library/re.html>)  
 
-Inside the default config files exisits two expressions to start the process.  
+Inside the default config files exists two expressions to start the process.  
 To be explicit, you should review the expressions to ensure they meet your  
 security needs before encrypting the config file. The current implementation  
 will **only** encrypt the attributes that the regular expressions detail.  
@@ -105,12 +103,24 @@ Please note that the regular expressions must be crafted with care.
 
 Reference the limitations section for more information.  
 
+#### Listing Exceptions to Encryption  
+
+The cloudmesh.security.exceptions section is intended to list attributes that  
+must not be encrypted. This section also explicitly uses python regular  
+expressions to capture which paths will **not** be encrypted. The default  
+regexps are necessary to decrypt data after they are encrypted. This includes  
+the entirety of the cloudmesh.security section and some mongodb attributes.    
+
+The exceptions section has higher priority over the secrets section. If a  
+path is matched between both the secrets and exceptions regular expressions the  
+path attribute will **not** be encrypted.  
+
 ### Cloudmesh Tools for Encryption  
 
 #### CmsEncryptor  
 
 The CmsEncryptor class is a general encryptor tool used for both symmetric and
-assymmetric encryption schemes. Currently RSA and AES-GCM encryption schemes
+asymmetric encryption schemes. Currently RSA and AES-GCM encryption schemes
 are the only available schemes for encryption. This is used to take bytes of
 data and return the encrypted bytes with other data if necessary.  
 
@@ -193,21 +203,46 @@ the actual key bytes.
 To give a practical example of the agent being unable to provide private key  
 bytes we can reference the [ssh_agent demo directory](<https://github.com/cloudmesh-community/fa19-516-144/tree/project/project/demo/ssh_agent>).  
 In short, we will use a public-private key pair to encrypt some data.  
-Even if the private key is added to the ssh-agent a password will be prompted.  
+Even if the private key is added to the ssh-agent a password will be prompted.    
 Please read the README within the directory further explanation.  
 
 ## Limitations  
 
-### Upgrading Cloudmesh.yaml  
+### Non-Authenticated Data  
 
-The cloudmesh.yaml version number is tied to the encryption of the data. If the
-version number is changed manually after the attributes are encrypted you will
-NOT be able to decrypt the data. This is used to future-proof Cloudmesh
-from attacks relaint on exploiting old version numbers. 
+Initially the CMS Encryptor utilized AES-GCM Additional Authenticated Data or  
+'aad'. The aad is non-secret data that can be paired with encryption to  
+guarantee the integrity of some other data. Originally the CmsEncryptor used the  
+cloudmesh version number as the aad. This introduced some instability when  
+encrypting large data sets required reverting the config file. Thus it was  
+removed. Since it was removed the Encryptor is not utilizing a powerful tool  
+granted by AES-GCM.   
 
-Simply run ```cloudmesh config decrypt``` before upgrading your config file. 
+### Password Management   
 
-### Matching More Cases than Intended with Cloudmesh.Security.Secrets Section  
+Passwords on private keys must be entered manually upon each request to decrypt  
+the data. No password management integration currently exists to ensure  
+passwords are only queried upon the first call. Password manager cli may be  
+possible solution (albeit exploitable via side-channel attacks, and potentially  
+extractable from local users). One possible tool to integrate may be 
+[keepassXC-cli](<https://www.mankier.com/1/keepassxc-cli#>)  
+
+### Decrypting or Acquiring Encrypted Data  
+
+The current implementation of configuration encryption encrypts all or none of  
+the target attributes. This means there is currently no functionality to query  
+for the value of a single attribute. Since each attribute is encrypted  
+individually with AES-GCM cipher the introduction of a query that decrypts  
+returns and encrypts should be trivial, especially if password management is  
+integrated.   
+
+### Full File Encryption  
+
+The CmsEncryptor is only encrypting data that could be held in memory. Thus  
+full file encryption is currently not supported. This could be extended if the  
+encryptor adds methods to process large quantities of bytes.   
+
+### Matching More Cases than Intended with Cloudmesh.Security.Secrets Section    
 
 By the definition of re the '.' symbol matches any single character.  
 Under most practical circumstance this should match on a literal '.' character  
@@ -217,34 +252,14 @@ to encrypt more values than intended.
 
 Example) regexp = '\.\*security\.secrets\.foo'  
 
-Let us have somewhere in cloudmesh.yaml the following  
+Let us have the following dotpaths  
+  * security.secrets.foo:bar  
+  * security.secretsXfoo:baz    
 
-security:  
-  secrets:  
-    foo: bar  
-  secretsXfoo: baz   
-
-Both bar and baz can be encrypted since the re '\.' can match on both the  
-literal '\.' and the character 'X'.   
+Both bar and baz will be encrypted since the re '\.' can match on both the  
+literal '\.' and the character 'X'. This should only bring minimal additional  
+overhead on the occasion it occurs.   
  
-### Encrypting Decryption-Dependent Data with Cloudmesh.Security.Secrets Section
-
-There are currently no safeguards to prevent encryption of data neccessary to  
-decrypt the config attributes. If you encrypt the cloudmesh\.version or **any**    
-attribute under the cloudmesh.security section decryption is **not** guranteed.    
-
-Expample: regexp = '\.\*sec\.\*'  
-
-Let us also have the default cloudmesh.yaml file.    
-
-This expression could match on both 'cloudmesh.security' and  
-'cloudmesh.security.secrets'. Since it matches all paths with 'sec' in it.    
-If the secrets are encrypted then the ```cloudmesh config decrypt``` command  
-cannot know which expressions to decrypt. If the other attributes of security  
-are encrypted then the command wouldn't know where the private key is located  
-or where the nonces and aes-gcm keys are located. Either case would be  
-catastrophic since the attributes you encrypted would be unattainable.   
-
 ## Work Breakdown  
 
 ### Week of Monday Nov. 25th  
@@ -256,6 +271,7 @@ catastrophic since the attributes you encrypted would be unattainable.
 1. Created Pull Request for [cms-cloud](<https://github.com/cloudmesh/cloudmesh-cloud/pull/245>)  
 1. Created Pull Request for [cms-common](<https://github.com/cloudmesh/cloudmesh-common/pull/10>)  
 1. Created Pull Request for [cms-configuration](<https://github.com/cloudmesh/cloudmesh-configuration/pull/2>)  
+1. Added couldmesh.security.exceptions to use regexp to deny encryption   
 
 ### Week of Monday Nov. 18th  
 
