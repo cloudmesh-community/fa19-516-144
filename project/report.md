@@ -5,6 +5,7 @@
 * email: hollanaa@iu.edu  
 
 * [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)  
+* [Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
 * [fork cms-cloud](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
 * [fork cms-common](<https://github.com/ElectricErudite/cloudmesh-common>)  
 * [fork cms-config](<https://github.com/ElectricErudite/cloudmesh-configuration>)  
@@ -72,24 +73,6 @@ Hit enter if there is no password
 
 ### Cloudmesh.Security Section  
 
-* Elliptic Curve Cryptography  
-* Advanced Encryption Standard Galois Counter Mode (AES-GCM)
-
-## Workbreakdown
-
-[Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
-
-## Progress
-
-### Week of Monday Oct. 07th
-
-#### Andrew
-
-1. Forked cloudmesh-cloud to local repo  
-    1. fork located [here](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
-1. Edited cms key --source=FILEPATH to now parse filepath argument  
-    1. Within [key-group branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/key-group>)  
-=======
 The cloudmesh.security section was added to allow users to control encryption.  
 In the current implementation the security section has four noteworthy attributes.  
 
@@ -371,6 +354,3 @@ This was necessary since the Config.get() function couldn't handle dot paths.
 1. Installed docker on local system to ease testing
 1. Began audit of cms-cloud/cms/security/encrypt.py-bug check /project/audit.md
 1. Took second pass look through the encrypt.py-bug. Wrote questions for Gregor  
-
-
-## References
