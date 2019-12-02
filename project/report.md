@@ -196,9 +196,9 @@ In short, we will use a public-private key pair to encrypt some data.
 Even if the private key is added to the ssh-agent a password will be prompted.  
 Please read the README within the directory further explanation.  
 
-## Special Cases
+## Limitations  
 
-### Upgrading Cloudmesh.yaml After Encrypting Attributes  
+### Upgrading Cloudmesh.yaml  
 
 The cloudmesh.yaml version number is tied to the encryption of the data. If the
 version number is changed manually after the attributes are encrypted you will
@@ -207,11 +207,7 @@ from attacks relaint on exploiting old version numbers.
 
 Simply run ```cloudmesh config decrypt``` before upgrading your config file. 
 
-## Limitations  
-
-### Cloudmesh.Security Section Attribute Selection  
-
-#### Matching More Cases Than Intended  
+### Matching More Cases than Intended with Cloudmesh.Security.Secrets Section  
 
 By the definition of re the '.' symbol matches any single character.  
 Under most practical circumstance this should match on a literal '.' character  
@@ -231,7 +227,7 @@ security:
 Both bar and baz can be encrypted since the re '\.' can match on both the  
 literal '\.' and the character 'X'.   
  
-#### Encrypting Data Necessary to Decrypt  
+### Encrypting Decryption-Dependent Data with Cloudmesh.Security.Secrets Section
 
 There are currently no safeguards to prevent encryption of data neccessary to  
 decrypt the config attributes. If you encrypt the cloudmesh\.version or **any**    
