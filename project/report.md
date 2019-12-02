@@ -1,14 +1,17 @@
 # Encryption of Cloud Secrets
 
-* Andrew Holland (hollanaa@iu.edu)   [fa19-516-144](https://github.com/cloudmesh-community/fa19-516-144)
-* repo: [fa19-516-144](<https://github.com/cloudmesh-community/fa19-516-144/tree/master>)  
-* email: hollanaa@iu.edu  
+Andrew Holland   
+  * repo: [fa19-516-144](<https://github.com/cloudmesh-community/fa19-516-144/tree/master>)  
+  * email: hollanaa@iu.edu  
 
-* [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)  
-* [Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
-* [fork cms-cloud](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
-* [fork cms-common](<https://github.com/ElectricErudite/cloudmesh-common>)  
-* [fork cms-config](<https://github.com/ElectricErudite/cloudmesh-configuration>)  
+Project Contributions  
+  * [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)  
+  * [Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)  
+
+Forked Repositories  
+  * [cms-cloud](<https://github.com/ElectricErudite/cloudmesh-cloud>)  
+  * [cms-common](<https://github.com/ElectricErudite/cloudmesh-common>)  
+  * [cms-config](<https://github.com/ElectricErudite/cloudmesh-configuration>)  
 
 ## Introduction  
 
@@ -51,7 +54,7 @@ further security opportunities that could be addressed in the future.
 1. Run ```cloudmesh config secinit```  
 1. Run ```cloudmesh config set cloudmesh.security.publickey=PATH```  
   - Where PATH is the path to your RSA public key  
-1. Run ``cloudmesh config set cloudmesh.security.privatekey=PATH```  
+1. Run ```cloudmesh config set cloudmesh.security.privatekey=PATH```  
   - Where PATH is the path to your RSA private key  
 1. Edit the cloudmesh.yaml file with your favorite editor  
   - Under the cloudmesh.security.secrets section add regular expressions to  
@@ -81,6 +84,7 @@ In the current implementation the security section has four noteworthy attribute
   - This must be the private key-paired with the public key  
 1. secpath: This is the operating system path that will hold keys and nonces  
 1. secrets: A list of regular expressions to select which attributes to encrypt  
+1. exceptions: A list of regular expressions to select attribute to **not** encrypt  
 
 #### Selecting the Attributes  
 
@@ -105,6 +109,8 @@ Please note that the regular expressions must be crafted with care.
 Reference the limitations section for more information.  
 
 #### Listing Exceptions to Encryption  
+
+Pending approval of [cms-config PR#8](<https://github.com/cloudmesh/cloudmesh-configuration/pull/8>)  
 
 The cloudmesh.security.exceptions section is intended to list attributes that  
 must not be encrypted. This section also explicitly uses python regular  
@@ -273,6 +279,9 @@ overhead on the occasion it occurs.
 1. Created Pull Request for [cms-common](<https://github.com/cloudmesh/cloudmesh-common/pull/10>)  
 1. Created Pull Request for [cms-configuration](<https://github.com/cloudmesh/cloudmesh-configuration/pull/2>)  
 1. Added couldmesh.security.exceptions to use regexp to deny encryption   
+1. Added pytest for cms-config encryption  
+1. Added [benchmarks](<https://github.com/cloudmesh-community/fa19-516-144/blob/master/project/2_local-security-hollanaa.md>) for cms-config encryption  
+1. Created Pull Request to introduce exceptions for [cms-configuration](<https://github.com/cloudmesh/cloudmesh-configuration/pull/8>)  
 
 ### Week of Monday Nov. 18th  
 
