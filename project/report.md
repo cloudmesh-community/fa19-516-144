@@ -80,7 +80,7 @@ security capabilities. If you wish to control where it is initialized reference 
 ```Additional Configuration Options``` section below. Otherwise, initialize the
 configuration capabilites by running the the following. 
 
-...bash::
+...bash:
 
     $ cms config secinit
 
@@ -90,7 +90,7 @@ The public key is used to encrypt data and the private key is used to decrypt.
 If you have previously generated an RSA key pair please reference the
 ```Additional Configuration Options``` section below. Otherwise run the following.  
 
-...bash::
+...bash
 
     $ cms key gen rsa --set_path
 
