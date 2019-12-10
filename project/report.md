@@ -182,7 +182,7 @@ Note: the keys can be located anywhere since they are looked up before encryptio
 
 Passwords for your RSA private key are recommended. It is much easier to 
 **lose all security gurantees** if you private key is not encrypted.
-Unless you have a good reason keep a password on your private file. 
+Unless you have a good reason, keep a password on your private file. 
 If you understand this and still wish to generate a key without a password run
 
 ```bash
@@ -198,7 +198,7 @@ regular expressions that will be matched on the dot paths to the attributes.
 To learn the specifics about python regular expression please reference the 
 [python re documentation](<https://docs.python.org/3.7/library/re.html>)
 
-By default, the secrets section has `.*`
+By default, the secrets section has `.*` which encrypts everything
 
 If you wish to encrypt all `AZURE_SECRET_KEY` attributes you can execute
 
@@ -213,7 +213,7 @@ For instance, to encrypt the mongo database `MONGO_PASSWORD`
 	$ cms config security add --secrets=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
 
-If you wish to remove any regular expressions you previously added run
+If you wish to remove any regular expressions from secrets run the following.
 
 ```bash
 	$ cms config security rmv --secrets=cloudmesh.data.mongo.MONGO_PASSWORD
@@ -286,11 +286,12 @@ be kept secret. The default and recommended hashing tool is SHA256.
 
 #### KeyLoader
 
-The KeyLoader class is responsible for opening and verifying the format of a
-given key file. Some variety of keys and formats are supported. Currently
-private keys can have PKCS8 or OpenSSL format and Public keys can have Subject
-Info or OpenSSH formats. Both PEM and SSH encoding is supported. It can open
-both passwordless and password-protected private key files.
+The KeyLoader class is responsible for generating, writing, loading, and 
+verifying the encoding and format of a given key file. Some variety of keys 
+and formats are supported. Currently, private keys can have PKCS8 or OpenSSL
+format and Public keys can have SubjectInfo or OpenSSH formats. 
+Both PEM and SSH encoding is supported. It can support both passwordless 
+and password-protected private key files.
 
 ### Encrypting and Decrypting Cloudmesh Attributes
 
@@ -298,31 +299,31 @@ both passwordless and password-protected private key files.
 
 1. Copy the contents of the config into a secure temporary file
    If at any time an error occurs the original config file is restored 
-1. The cloudmesh.security.secpath value is queried from the config
-1. Load the key whose path is referenced in cloudmesh.security.publickey
-1. For each regular expression, apply it on all paths of the config file
-1. For each applied path, get the value and hash the full path
-1. Encrypt the value with CmsEncryptor using AES-GCM
-1. Take the generated key, generated, nonce, and ciphertext
-1. Encrypt the nonce and key with CmsEncryptor using RSA
-1. Store an integer encoding of the ciphertext in the cloudmesh config
-1. Store the encrypted key and nonce in separate files with the hash as base name
-1. Delete the temporary file
+2. The cloudmesh.security.secpath value is queried from the config
+3. Load the key whose path is referenced in cloudmesh.security.publickey
+4. For each regular expression, apply it on all paths of the config file
+5. For each applied path, get the value and hash the full path
+6. Encrypt the value with CmsEncryptor using AES-GCM
+7. Take the generated key, generated, nonce, and ciphertext
+8. Encrypt the nonce and key with CmsEncryptor using RSA
+9. Store an integer encoding of the ciphertext in the cloudmesh config
+10. Store the encrypted key and nonce in separate files with the hash as base name
+11. Delete the temporary file
 
 #### Internal Process for Decryption
 
 1. Copy the contents of the config into a secure temporary file
    If at any time an error occurs the original config file is restored 
-1. Query the config for the value of cloudmesh.security.secpath
-1. Load the key whose path is referenced in cloudmesh.security.privatekey
-1. For each regular expression, apply it on all paths of the config file
-1. For each applied path produce the hash and load the nonce and key
-1. Decrypt the nonce and key with CmsEncryptor using RSA
-1. Get the ciphertext from the config down the full path
-1. Decrypt the ciphertext using the key, nonce, and cloudmesh.version number
-1. Set the path attribute with the plaintext
-1. Delete the files with hash as base name in the secpath directory
-1. Delete the temporary file
+2. Query the config for the value of cloudmesh.security.secpath
+3. Load the key whose path is referenced in cloudmesh.security.privatekey
+4. For each regular expression, apply it on all paths of the config file
+5. For each applied path produce the hash and load the nonce and key
+6. Decrypt the nonce and key with CmsEncryptor using RSA
+7. Get the ciphertext from the config down the full path
+8. Decrypt the ciphertext using the key, nonce, and cloudmesh.version number
+9. Set the path attribute with the plaintext
+10. Delete the files with hash as base name in the secpath directory
+11. Delete the temporary file
 
 #### Key Management
 
@@ -332,8 +333,21 @@ There are two keys used for encryption and decryption. The symmetric key which
 is an AES-256 key that is automatically generated by CmsEncryptor and the
 private-public RSA key pair generated by the user. 
 
-The RSA key should be in PEM format, with 2048 bits. This key could also be
+The RSA key should be in PEM format, with 2048 bits. This key could be
 generated by using the ```cms key gen rsa``` command. 
+
+Since symmetric keys require more computation to crack than assymmetric keys
+we encrypt the actual data with the AES-GCM cipher. This will produce the 
+ciphertext (which is stored in cloudmesh.yaml), a nonce (one time random 
+data), and an AES key that was used to encrypt the data. 
+
+The nonce and key are encrypted with the users RSA key pair located at the 
+path listed within the `cloudmesh.security.publickey` attribute. 
+Technically, the nonce need not be kept secret, but minimal computational
+effort is lost by encrypting the data. The encrypted nonce and key are 
+stored within the `cloudmesh.security.secpath` directory. This is why the 
+```cloudmesh config secinit``` command was required during configuration.
+The secinit command ensured the directory was created. 
 
 ##### Attempt to Automate with SSH-Agent
 
@@ -383,12 +397,28 @@ extractable from local users). One possible tool to integrate may be
 
 ### Referencing Encrypted Data
 
-The current implementation of configuration encryption encrypts all or none of
-the target attributes. This means there is currently no functionality to query
-for the value of a single attribute. Since each attribute is encrypted
-individually with AES-GCM cipher the introduction of a query that decrypts
-returns and encrypts should be trivial, especially if password management is
-integrated. 
+The current implementation of configuration encryption is intended to secure 
+the configuration secrets at rest. This means all of the attributes are encrypted
+or none of them are. This limits the practicality of utilizing the encrypt and 
+decrypt commands. 
+
+To make config encryption more useful some functionality to query encrypted data
+should be introduced. This extension should not require extensive effort since 
+the keys are stored and gathered in a general manner. 
+
+One appoarch may be to decrypt the config within the users shell instance and 
+store the private key in memory. Whenever an encrypted value is quired you 
+could decrypt it, return the value, then re-encrypt the value. 
+
+This apporoach should be taken with care to not expose the key contents. 
+This would also mean the key could be extracted from side-channel attacks. 
+
+Another apporach would be to have some password manager store the keys. 
+When a session is started have them use the password to the password db. 
+Then when a value is requested, query the db for the cipher value, 
+decrypt the value and return it. This has the benefit of not requiring 
+re-encryption, but is vulnerable to side-channel attacks **and** requires
+extensive thought on how an attacker could acquire the keys. 
 
 ### Replacing the EncryptFile class
 
@@ -403,8 +433,8 @@ be replaced by the relevant CmsEncryptor, CmsHasher, or KeyHandler functions.
 
 ### Matching More Cases than Intended with Cloudmesh.Security.Secrets Section
 
-By the definition of re the '.' symbol matches any single character.
-Under most practical circumstance this should match on a literal '.' character
+By the definition of python re the `.` symbol matches any single character.
+Under most practical circumstance this should match on a literal `.` character
 since all paths in the cloudmesh.yaml config are presented as dotpaths.
 Due to these design choices it is technically possible for the expressions 
 to encrypt more values than intended.
@@ -413,13 +443,16 @@ Example) regexp = ```.*security.secrets.foo```
 
 Let us have the following dotpaths
 
-* security.secrets.foo:bar
+```
+	security.secrets.foo:bar
+	security.secretsXfoo:baz
+```
 
-* security.secretsXfoo:baz
-
-Both bar and baz will be encrypted since the re '\.' can match on both the
-literal '\.' and the character 'X'. This should only bring minimal additional
-overhead on the occasion it occurs. 
+Both bar and baz will be encrypted since the re `.` can match on both the
+literal `.` and the character `X`. This should only bring minimal additional
+overhead on the occasion it occur. This could be corrected by defining more
+specific syntax when adding secrets and exceptions or by checking if the
+given expression for ```cms config security add ...``` is regexp at all.
  
 ## Work Breakdown
 
