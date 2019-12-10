@@ -193,7 +193,7 @@ If you understand this and still wish to generate a key without a password run
 
 Internally, Cloudmesh represents all attributes as the yaml dot path to the
 attribute. The `cloudmesh.security.secrets` attribute takes a list of python
-regular expressions that will be matched on the dot paths to the attributes.  
+regular expressions that will be matched on the dot paths to the attributes.
 
 To learn the specifics about python regular expression please reference the 
 [python re documentation](<https://docs.python.org/3.7/library/re.html>)
@@ -206,7 +206,7 @@ If you wish to encrypt all `AZURE_SECRET_KEY` attributes you can execute
 	$ cms config security add --secrets=.*AZURE_SECRET_KEY
 ```
 
-If you wish to encrypt a specific attribute you can provide the dot path.  
+If you wish to encrypt a specific attribute you can provide the dot path.
 For instance, to encrypt the mongo database `MONGO_PASSWORD`
 
 ```bash
@@ -221,14 +221,14 @@ If you wish to remove any regular expressions you previously added run
 
 #### Selecting Attributes to Exclude from Encryption
 
-The `cloudmesh.security.exceptions` section is intended to list attributes that  
-must **not** be encrypted. This section also explicitly uses python regular  
-expressions to capture the attribute dot paths. The default exceptions  
-included in the exceptions section are necessary for the decryption of data.  
+The `cloudmesh.security.exceptions` section is intended to list attributes that
+must **not** be encrypted. This section also explicitly uses python regular
+expressions to capture the attribute dot paths. The default exceptions
+included in the exceptions section are necessary for the decryption of data.
 
-Note that the exceptions section has priority over the secrets section. If  
-there is ever an attribute that is matched on both secrets and exceptions  
-regular expressions the attribute will **not** be encrypted.  
+Note that the exceptions section has priority over the secrets section. If
+there is ever an attribute that is matched on both secrets and exceptions
+regular expressions the attribute will **not** be encrypted.
 
 For instance, if you wish to ensure that none of the `AZURE_SECRET_KEY`
 attributes are encrypted run the following. 
@@ -237,7 +237,7 @@ attributes are encrypted run the following.
 	$ cms config security add --exceptions=.*AZURE_SECRET_KEY
 ```
 
-If you wish to exclude a specific attribute give the dot path.  
+If you wish to exclude a specific attribute give the dot path.
 
 ```bash
 	$ cms config security add --exceptions=cloudmesh.data.mongo.MONGO_PASSWORD
@@ -423,20 +423,28 @@ overhead on the occasion it occurs.
  
 ## Work Breakdown
 
-### Week of Monday Dec. 02nd  
+### Week of Monday Dec. 09th
 
-1. Reformatted report.md  
-1. Added ```cms key gen rsa``` that can generate pem encoded RSA key pairs  
-1. Added ```cms key gen ssh``` that can generate RSA key pair for OpenSSH  
-1. Added write_key function that handles writing a key to a file  
-1. Remove nonces and keys on failed encryption  
-1. Added --nopass argument for dealing with keys that have no password  
-1. Corrected encryption to have OS agnostic file operations  
-1. Added --add_secret=REGEXP argument that adds REGEXP to secrets section  
-1. Added --add_exception=REGEXP argument that adds REGEXP to exceptions  
+1. Reformatted report to be more digestible manual 
+1. Created branches `remove_EF` that eliminated EncrypFile references
+1. Simplified the ```key gen``` command to only take FILENAME arg
+1. Added warning to ```key gen``` when no password is set for private key 
+1. Replaced ```config ssh check``` and ```config ssh verify``` with  ```key verify```
+
+### Week of Monday Dec. 02nd
+
+1. Reformatted report.md
+1. Added ```cms key gen rsa``` that can generate pem encoded RSA key pairs
+1. Added ```cms key gen ssh``` that can generate RSA key pair for OpenSSH
+1. Added `write_key()` function that handles writing a key to a file
+1. Remove nonces and keys on failed encryption
+1. Added --nopass argument for dealing with keys that have no password
+1. Corrected encryption to have OS agnostic file operations
+1. Added `--add_secret=REGEXP` argument that adds REGEXP to secrets section
+1. Added `--add_exception=REGEXP` argument that adds REGEXP to exceptions
 
 
-### Week of Monday Nov. 25th  
+### Week of Monday Nov. 25th
 
 1. Changed encoding of secrets from base64 to integers
 1. Added cloudmesh.security section in cloudmesh.yaml default config
@@ -445,7 +453,7 @@ overhead on the occasion it occurs.
 1. Created Pull Request for [cms-cloud](<https://github.com/cloudmesh/cloudmesh-cloud/pull/245>)
 1. Created Pull Request for [cms-common](<https://github.com/cloudmesh/cloudmesh-common/pull/10>)
 1. Created Pull Request for [cms-configuration](<https://github.com/cloudmesh/cloudmesh-configuration/pull/2>)
-1. Added couldmesh.security.exceptions to use regexp to deny encryption 
+1. Added `couldmesh.security.exceptions` to use regexp to deny encryption 
 1. Added pytest for cms-config encryption
 1. Added [benchmarks](<https://github.com/cloudmesh-community/fa19-516-144/blob/master/project/2_local-security-hollanaa.md>) for cms-config encryption
 1. Created Pull Request to introduce exceptions for [cms-configuration](<https://github.com/cloudmesh/cloudmesh-configuration/pull/8>)
