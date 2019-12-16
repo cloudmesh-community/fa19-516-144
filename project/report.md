@@ -152,12 +152,12 @@ wish that cloudmesh secrets are stored within `~/.cloudmesh/.foosec` run the fol
 
 The `cms key gen` command will automatically generate the key pair into the default
 locations of `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub`. If this key already exists or
-if you prefer a different location use the --name=KEYNAME flag. Where KEYNAME is
+if you prefer a different location use the --filename=FILENAME flag. Where FILENAME is
 the full path to the key you would like to generate. For example, if we would
 like to have a keys called `cms` and `cms.pub` in the .ssh directory execute
 
 ```bash
-	$ cms key gen rsa --name=~/.ssh/cms
+	$ cms key gen rsa --filename=~/.ssh/cms
 ```
 
 ##### Setting Keys for Encryption Without Key Gen Command
