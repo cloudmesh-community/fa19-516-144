@@ -15,8 +15,8 @@ Repositories Impacted
 * [cloudmesh-cloud](<https://github.com/cloudmesh/cloudmesh-cloud>)
   - [key.py](<https://github.com/cloudmesh/cloudmesh-cloud/blob/master/cloudmesh/key/command/key.py>)
   - [config.py](<https://github.com/cloudmesh/cloudmesh-cloud/blob/master/cloudmesh/config/command/config.py>)
-  - encrypt.py: [removed here](<https://github.com/cloudmesh/cloudmesh-cloud/pull/255/files#diff-3d9efa259b85a5065a3c53be738e9d81>)
-  - test_encryption: [removed here](<https://github.com/cloudmesh/cloudmesh-cloud/pull/255/files#diff-3d9efa259b85a5065a3c53be738e9d81>)
+  - `encrypt.py`: [removed here](<https://github.com/cloudmesh/cloudmesh-cloud/pull/255/files#diff-3d9efa259b85a5065a3c53be738e9d81>)
+  - `test_encryption.py`: [removed here](<https://github.com/cloudmesh/cloudmesh-cloud/pull/255/files#diff-3d9efa259b85a5065a3c53be738e9d81>)
   
 * [cloudmesh-configuration](<https://github.com/cloudmesh/cloudmesh-configuration>)
   - [Config.py](<https://github.com/cloudmesh/cloudmesh-configuration/blob/master/cloudmesh/configuration/Config.py>)
@@ -99,7 +99,7 @@ If you have previously generated an RSA key pair please reference the
 [Additional Configuration Options](#aco) section below. Otherwise run the following.
 
 ```bash
-$ cms key gen rsa --set_path
+$ cms key gen pem --set_path
 ```
 
 Now that we have the initialized system and RSA key pair we can encrypt the config. 
@@ -409,6 +409,13 @@ possible solution (albeit exploitable via side-channel attacks, and potentially
 extractable from local users). One possible tool to integrate may be 
 [keepassXC-cli](<https://www.mankier.com/1/keepassxc-cli#>)
 
+There are several password managements tools that have been developed over the
+last decade but not all are useful for cloudmesh. kpcli and kedpm are two 
+historical password manager, but they lack modern development. Keepass2-cli 
+has more active development but lacks some of the intuitive command line features
+that keepassXC-cli has. the gopass password manager seems useful for the inteded
+purposes of cloudmesh, but it is still in early development. 
+
 ### Referencing Encrypted Data
 
 The current implementation of configuration encryption is intended to secure 
@@ -468,112 +475,9 @@ overhead on the occasion it occur. This could be corrected by defining more
 specific syntax when adding secrets and exceptions or by checking if the
 given expression for ```cms config security add ...``` is regexp at all.
  
-## Work Breakdown
-
-### Week of Monday Dec. 09th
-
-1. Reformatted report to be more digestible manual 
-1. Created branches `remove_EF` that eliminated EncrypFile references
-1. Simplified the ```key gen``` command to only take FILENAME arg
-1. Added warning to ```key gen``` when no password is set for private key 
-1. Replaced ```config ssh check``` and ```config ssh verify``` with  ```key verify```
-
-### Week of Monday Dec. 02nd
-
-1. Reformatted report.md
-1. Added ```cms key gen rsa``` that can generate pem encoded RSA key pairs
-1. Added ```cms key gen ssh``` that can generate RSA key pair for OpenSSH
-1. Added `write_key()` function that handles writing a key to a file
-1. Remove nonces and keys on failed encryption
-1. Added --nopass argument for dealing with keys that have no password
-1. Corrected encryption to have OS agnostic file operations
-1. Added `--add_secret=REGEXP` argument that adds REGEXP to secrets section
-1. Added `--add_exception=REGEXP` argument that adds REGEXP to exceptions
-
-
-### Week of Monday Nov. 25th
-
-1. Changed encoding of secrets from base64 to integers
-1. Added cloudmesh.security section in cloudmesh.yaml default config
-1. Added cloudmesh.security.secrets to use regexp to pick attributes for encryption
-1. Implemented file reversion in case encryption or decryption fails
-1. Created Pull Request for [cms-cloud](<https://github.com/cloudmesh/cloudmesh-cloud/pull/245>)
-1. Created Pull Request for [cms-common](<https://github.com/cloudmesh/cloudmesh-common/pull/10>)
-1. Created Pull Request for [cms-configuration](<https://github.com/cloudmesh/cloudmesh-configuration/pull/2>)
-1. Added `couldmesh.security.exceptions` to use regexp to deny encryption 
-1. Added pytest for cms-config encryption
-1. Added [benchmarks](<https://github.com/cloudmesh-community/fa19-516-144/blob/master/project/2_local-security-hollanaa.md>) for cms-config encryption
-1. Created Pull Request to introduce exceptions for [cms-configuration](<https://github.com/cloudmesh/cloudmesh-configuration/pull/8>)
-
-### Week of Monday Nov. 18th
-
-1. Added writefd() to cloudmesh-common/util.py to allow writing permissions
-1. Added wr only permissions to nonce and key files
-
-### Week of Monday Nov. 11th
-
-1. add get\_path() function to Config() class to return yaml dot path(s) to key
-1. implemented means to get value from config given a dot path to key the get()
-This was necessary since the Config.get() function couldn't handle dot paths.
-1. Wrote script to begin testing encryption of config values
-1. Began integration into cloudmesh by testing Config.set with encrypted data
-1. Added file permission argument to cloudmesh.common.util.writefile
-1. Edited ```cms config encrypt``` to encrypt the config file
-
-### Week of Monday Nov. 4th
-
-1. Implemented asymmetric encryption using rsa
-1. wrote script to demonstrate ssh-agent cannot be used with encryption 
-1. added README for running the scripts
-1. added CmsHasher class to hash data (can be used for unique file name generation)
-
-### Week of Monday Oct. 28th
-
-1. Investigated using ssh-agent modules paramiko, and ssh2-python
-1. Investigated ssh-agent documentation. Discovered use case is for signing only.
-1. Implemented symmetric encryption using AES-GCM
-
-### Week of Monday Oct. 21st
-
-1. Finished Analysis of openssl related files found [here](<https://github.com/cloudmesh-community/fa19-516-144/blob/audit/project/audit.md>)
-1. Established weekly meeting time with partner.
-1. Discussed cms key and cms keygroup commands with partner. 
-1. Updated project.md to address concerns related to partner's project. 
-1. Added initial writings for book chapters within the /project/chapters dir
-1. Added initial encryptor and pem\_handler to replace old encrypt.py
-
-### Week of Monday Oct. 14th
-
-1. Created the KeyGroup.py file to handle key groups
-
-   1. Need to investigate the purpose of SecGroup.output
-
-1. Designed queries
-
-### Week of Monday Oct. 07th
-
-1. Forked cloudmesh-cloud to local repo
- 
-   1. fork located [here](<https://github.com/ElectricErudite/cloudmesh-cloud>)
-
-1. Edited cms key --source=FILEPATH to now parse filepath argument
-
-   1. Within [key-group branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/key-group>)
-
-1. Investigating how to add new local-keygroup collection to database
-1. Installed robo3t to observe changes to local mongodb
-
-### Week of Monday Sep. 30th 
-
-1. Submitted PR for debian 9 installation of mongo
-1. Installed docker on local system to ease testing
-1. Began audit of cms-cloud/cms/security/encrypt.py-bug check /project/audit.md
-1. Took second pass look through the encrypt.py-bug. Wrote questions for Gregor
-
-
 ## Refernces
 
-Password Managers:
+### Password Managers
 
 1. [kpcli](<http://kpcli.sourceforge.net/>)
 2. [gopass](<https://www.gopass.pw/>)
