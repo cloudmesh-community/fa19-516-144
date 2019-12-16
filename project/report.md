@@ -3,21 +3,17 @@
 Andrew Holland 
 
 * repo: [fa19-516-144](<https://github.com/cloudmesh-community/fa19-516-144/tree/master>)
-
 * email: hollanaa@iu.edu
 
 Project Contributions
 
 * [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)
-
 * [Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)
 
 Forked Repositories
 
 * [cms-cloud](<https://github.com/ElectricErudite/cloudmesh-cloud>)
-
 * [cms-common](<https://github.com/ElectricErudite/cloudmesh-common>)
-
 * [cms-config](<https://github.com/ElectricErudite/cloudmesh-configuration>)
 
 ## Introduction
@@ -61,16 +57,17 @@ passwords. This is all done through the ```cms config encrypt``` and
 You must be sure that cloudmesh is installed. The easiest way to install
 cloudmseh is via pip. However, it is not yet released with the security extensions
 we discuss below. If you would like to use them you need to install
-cloudmesh-cloud from source. Which is discussed in the [cloudmesh manual](<https://cloudmesh.github.io/cloudmesh-manual/installation/install.html>)
+cloudmesh-cloud from source. Which is discussed in the 
+[cloudmesh manual](<https://cloudmesh.github.io/cloudmesh-manual/installation/install.html>)
 To remind you how easy it is you can use the following steps.
 
 ```bash
-	$ mkdir cm 
-	$ cd cm
-	$ pip install cloudmesh-installer
-	$ cloudmesh-installer git clone cloud 
-	$ cloudmesh-installer install cloud
-	$ cms help
+$ mkdir cm 
+$ cd cm
+$ pip install cloudmesh-installer
+$ cloudmesh-installer git clone cloud 
+$ cloudmesh-installer install cloud
+$ cms help
 ```
 
 Please remember that after this you will have to configure your `~/.cloudmesh/cloudmesh.yaml`
@@ -552,20 +549,23 @@ This was necessary since the Config.get() function couldn't handle dot paths.
 
    1. Within [key-group branch](<https://github.com/ElectricErudite/cloudmesh-cloud/tree/key-group>)
 
-
 1. Investigating how to add new local-keygroup collection to database
 1. Installed robo3t to observe changes to local mongodb
 
 ### Week of Monday Sep. 30th 
 
-1. Researched password managers for future integration discovered
-
-	1. [kpcli](<http://kpcli.sourceforge.net/>)
-	2. [gopass](<https://www.gopass.pw/>)
-	3. [kedpm](<http://kedpm.sourceforge.net/>)
-	4. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)
-
 1. Submitted PR for debian 9 installation of mongo
 1. Installed docker on local system to ease testing
 1. Began audit of cms-cloud/cms/security/encrypt.py-bug check /project/audit.md
 1. Took second pass look through the encrypt.py-bug. Wrote questions for Gregor
+
+
+## Refernces
+
+Password Managers:
+
+1. [kpcli](<http://kpcli.sourceforge.net/>)
+2. [gopass](<https://www.gopass.pw/>)
+3. [kedpm](<http://kedpm.sourceforge.net/>)
+4. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)
+
