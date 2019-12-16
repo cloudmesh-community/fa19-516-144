@@ -78,7 +78,7 @@ security capabilities. If you wish to control where it is initialized reference 
 configuration capabilites by running the the following. 
 
 ```bash
-	$ cms config secinit
+$ cms config secinit
 ```
 
 Now that we have the proper system related properties initalized we need an RSA
@@ -88,7 +88,7 @@ If you have previously generated an RSA key pair please reference the
 [Additional Configuration Options](#aco) section below. Otherwise run the following.
 
 ```bash
-	$ cms key gen rsa --set_path
+$ cms key gen rsa --set_path
 ```
 
 Now that we have the initialized system and RSA key pair we can encrypt the config. 
@@ -102,7 +102,7 @@ To edit which attributes are encrypted or excluded from encryption reference
 the [Additional Configuration Options](#aco) section below. 
 
 ```bash
-	$ cms config encrypt
+$ cms config encrypt
 ```
 
 After this command is completed all of the explicitly defined secrets are
@@ -118,7 +118,7 @@ config file.
 The configuration file can be decrypted by running the following command. 
 
 ```bash
-	$ cms config decrypt
+$ cms config decrypt
 ```
 
 If the private key was password protected you must enter the password when
@@ -126,7 +126,7 @@ prompted. If the key has no password either hit enter immediately after being
 prompted or run the following. 
 
 ```bash
-	$ cms config decrypt --nopass
+$ cms config decrypt --nopass
 ```
 
 ### Additional Configuration Options<a name="aco"></a>
@@ -139,8 +139,8 @@ you must edit the `cloudmesh.security.secpath` attribute. For example, if you
 wish that cloudmesh secrets are stored within `~/.cloudmesh/.foosec` run the following
 
 ```bash
-	$ cms config set cloudmesh.security.secpath=~/.cloudmesh/.foosec
-	$ cms config secinit
+$ cms config set cloudmesh.security.secpath=~/.cloudmesh/.foosec
+$ cms config secinit
 ```
 
 #### CMS Key Gen Options 
@@ -154,7 +154,7 @@ the full path to the key you would like to generate. For example, if we would
 like to have a keys called `cms` and `cms.pub` in the .ssh directory execute
 
 ```bash
-	$ cms key gen rsa --filename=~/.ssh/cms
+$ cms key gen rsa --filename=~/.ssh/cms
 ```
 
 ##### Setting Keys for Encryption Without Key Gen Command
@@ -169,8 +169,8 @@ For instance let us assume we already had `~/.ssh/priv/cms` and its public key
 pair `~/.ssh/pub/cms.pub`
 
 ```bash
-	$ cms config set cloudmesh.security.privatekey=~/.ssh/priv/cms
-	$ cms config set cloudmesh.security.publickey=~/.ssh/pub/cms.pub
+$ cms config set cloudmesh.security.privatekey=~/.ssh/priv/cms
+$ cms config set cloudmesh.security.publickey=~/.ssh/pub/cms.pub
 ```
 
 Note: the keys can be located anywhere since they are looked up before encryption.
@@ -183,7 +183,7 @@ Unless you have a good reason, keep a password on your private file.
 If you understand this and still wish to generate a key without a password run
 
 ```bash
-	$ cms key gen rsa --nopass
+$ cms key gen rsa --nopass
 ```
 
 #### Selecting Attributes to Encrypt
@@ -200,20 +200,20 @@ By default, the secrets section has `.*` which encrypts everything
 If you wish to encrypt all `AZURE_SECRET_KEY` attributes you can execute
 
 ```bash
-	$ cms config security add --secrets=.*AZURE_SECRET_KEY
+$ cms config security add --secrets=.*AZURE_SECRET_KEY
 ```
 
 If you wish to encrypt a specific attribute you can provide the dot path.
 For instance, to encrypt the mongo database `MONGO_PASSWORD`
 
 ```bash
-	$ cms config security add --secrets=cloudmesh.data.mongo.MONGO_PASSWORD
+$ cms config security add --secrets=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
 
 If you wish to remove any regular expressions from secrets run the following.
 
 ```bash
-	$ cms config security rmv --secrets=cloudmesh.data.mongo.MONGO_PASSWORD
+$ cms config security rmv --secrets=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
 
 #### Selecting Attributes to Exclude from Encryption
@@ -231,13 +231,13 @@ For instance, if you wish to ensure that none of the `AZURE_SECRET_KEY`
 attributes are encrypted run the following. 
 
 ```bash
-	$ cms config security add --exceptions=.*AZURE_SECRET_KEY
+$ cms config security add --exceptions=.*AZURE_SECRET_KEY
 ```
 
 If you wish to exclude a specific attribute give the dot path.
 
 ```bash
-	$ cms config security add --exceptions=cloudmesh.data.mongo.MONGO_PASSWORD
+$ cms config security add --exceptions=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
 
 If you wish to remove any regular expressions within the exceptions section run
@@ -245,8 +245,8 @@ the ```cms config security rmv``` command. For instance to remove the example
 exceptions. 
 
 ```bash
-	$ cms config security rmv --exceptions=.*AZURE_SECRET_KEY
-	$ cms config security rmv --exceptions=cloudmesh.data.mongo.MONGO_PASSWORD
+$ cms config security rmv --exceptions=.*AZURE_SECRET_KEY
+$ cms config security rmv --exceptions=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
 
 ## Implementation
@@ -447,8 +447,8 @@ Example) regexp = ```.*security.secrets.foo```
 Let us have the following dotpaths
 
 ```
-	security.secrets.foo:bar
-	security.secretsXfoo:baz
+security.secrets.foo:bar
+security.secretsXfoo:baz
 ```
 
 Both bar and baz will be encrypted since the re `.` can match on both the
