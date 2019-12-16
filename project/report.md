@@ -3,22 +3,22 @@
 Andrew Holland 
 
 * repo: [fa19-516-144](<https://github.com/cloudmesh-community/fa19-516-144/tree/master>)
+
 * email: hollanaa@iu.edu
 
 Project Contributions
 
 * [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)
+
 * [Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)
 
 Forked Repositories
 
 * [cms-cloud](<https://github.com/ElectricErudite/cloudmesh-cloud>)
+
 * [cms-common](<https://github.com/ElectricErudite/cloudmesh-common>)
+
 * [cms-config](<https://github.com/ElectricErudite/cloudmesh-configuration>)
-
-:o2: please also check validity on python 3.8
-
-:o2: Verify formatting with PyCharm
 
 ## Introduction
 
@@ -275,14 +275,20 @@ All tools are located within [encrypt.py](<https://github.com/cloudmesh/cloudmes
 The CmsEncryptor class is a general encryptor tool used for both symmetric and
 asymmetric encryption schemes. Currently RSA and AES-GCM encryption schemes
 are the only available schemes for encryption. This is used to take bytes of
-data and return the encrypted bytes with other data if necessary.
+data and return the encrypted bytes with other data if necessary. This can 
+also be used for full file encryption. Due however note that this particular
+functionality has not been tested with arbitrarily large file sizes.
 
 #### CmsHasher
 
 The CmsHasher class is used for hashing techniques. Currently SHA256 and MD5
 are supported. Note MD5 is an **insecure** hashing tool. It should only be
 used when you are absolutely sure that the data being hashed does not need to
-be kept secret. The default and recommended hashing tool is SHA256.
+be kept secret. The default and recommended hashing tool is SHA256. The 
+Hasher is used hash the attribute dot paths that are encrypted and use the 
+hash as a base file name. MD5 is used in this instance since the security 
+of the secrets does not rely on hiding the path of the attribute that was 
+encrypted. 
 
 #### KeyLoader
 
@@ -320,7 +326,7 @@ and password-protected private key files.
 5. For each applied path produce the hash and load the nonce and key
 6. Decrypt the nonce and key with CmsEncryptor using RSA
 7. Get the ciphertext from the config down the full path
-8. Decrypt the ciphertext using the key, nonce, and cloudmesh.version number
+8. Decrypt the ciphertext using the key, and nonce
 9. Set the path attribute with the plaintext
 10. Delete the files with hash as base name in the secpath directory
 11. Delete the temporary file
