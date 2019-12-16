@@ -441,16 +441,15 @@ decrypt the value and return it. This has the benefit of not requiring
 re-encryption, but is vulnerable to side-channel attacks **and** requires
 extensive thought on how an attacker could acquire the keys. 
 
-### Replacing the EncryptFile class
+### Encrypting Abritrarily Large Files
 
-The EncryptFile class can be replaced by the combination of CmsEncryptor,
-CmsHasher, and KeyHandler classes. The KeyHandler class generates and 
-verifies the integrity of keys. The CmsEncryptor has an implementation of 
-full file encryption. Namely the `CmsEncryptor.encrypt_file()` function. 
-This function has not been tested with arbitrarily large files. 
-
-Provided testing has been conducted, all references to the EncryptFile should
-be replaced by the relevant CmsEncryptor, CmsHasher, or KeyHandler functions.
+The EncryptFile class was replaced by the `CmsEncryptor` and `KeyHandler` 
+classes. The `CmsEncryptor.encrypt_file()` function is responsible for 
+encrypting the contents of any given file path. This function has
+undergone testing files but not with large file sizes. Namely it has 
+not tested file sizes that are larger than the machines memory limits. 
+To ensure the functionality is correct file sizes of 50GB+ should be 
+encrypted and decrypted to ensure that data is not lost or unencrypted.
 
 ### Matching More Cases than Intended with Cloudmesh.Security.Secrets Section
 
