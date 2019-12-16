@@ -10,11 +10,22 @@ Project Contributions
 * [Contributors](<https://github.com/cloudmesh-community/fa19-516-144/graphs/contributors>)
 * [Github Repo Insights](<https://github.com/cloudmesh-community/fa19-516-144/pulse>)
 
-Forked Repositories
+Repositories Impacted
 
-* [cms-cloud](<https://github.com/ElectricErudite/cloudmesh-cloud>)
-* [cms-common](<https://github.com/ElectricErudite/cloudmesh-common>)
-* [cms-config](<https://github.com/ElectricErudite/cloudmesh-configuration>)
+* cloudmesh-cloud
+  - [key.py](<https://github.com/cloudmesh/cloudmesh-cloud/blob/master/cloudmesh/key/command/key.py>)
+  - [config.py](<https://github.com/cloudmesh/cloudmesh-cloud/blob/master/cloudmesh/config/command/config.py>)
+  - encrypt.py: [removed here](<https://github.com/cloudmesh/cloudmesh-cloud/pull/255/files#diff-3d9efa259b85a5065a3c53be738e9d81>)
+  - test_encryption: [removed here](<https://github.com/cloudmesh/cloudmesh-cloud/pull/255/files#diff-3d9efa259b85a5065a3c53be738e9d81>)
+  
+* cloudmesh-configuration
+  - [Config.py](<https://github.com/cloudmesh/cloudmesh-configuration/blob/master/cloudmesh/configuration/Config.py>)
+  - [encrypt.py](<https://github.com/cloudmesh/cloudmesh-configuration/blob/master/cloudmesh/configuration/security/encrypt.py>)
+  - [test_encryption.py](<https://github.com/cloudmesh/cloudmesh-configuration/blob/master/tests/test_encryption.py>)
+  - [cloudmesh.yaml](<https://github.com/cloudmesh/cloudmesh-configuration/blob/master/cloudmesh/configuration/etc/cloudmesh.yaml>)
+
+* cloudmesh-common
+  - [util.py](<https://github.com/cloudmesh/cloudmesh-common/blob/master/cloudmesh/common/util.py>)
 
 ## Introduction
 
