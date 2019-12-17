@@ -1,9 +1,5 @@
 # Encryption of Cloud Secrets
 
-:o2: please make sure you use 80 column formatting. make sure this is
-true for report and man page you modify.
-links do not have to be in 80 col format
-
 Andrew Holland 
 
 * repo: [fa19-516-144](<https://github.com/cloudmesh-community/fa19-516-144/tree/master>)
@@ -111,12 +107,12 @@ $ cloudmesh-installer install cloud
 $ cms help
 ```
 
-Please remember that after this you will have to configure your `~/.cloudmesh/cloudmesh.yaml`
+Please remember to configure your `~/.cloudmesh/cloudmesh.yaml` file
 
 After the system has been installed cloudmesh will need to initialize its
-security capabilities. If you wish to control where it is initialized reference the 
-[Additional Configuration Options](#aco) section below. Otherwise, initialize the
-configuration capabilities by running the the following. 
+security features. If you wish to control where it is initialized reference the
+[Additional Configuration Options](#aco) section below. Otherwise, initialize
+the configuration capabilities by running the the following. 
 
 ```bash
 $ cms config secinit
@@ -126,13 +122,14 @@ Now that we have the proper system related properties initialized we need an RSA
 public-private key pair to execute encryption and decryption of the data.
 The public key is used to encrypt data and the private key is used to decrypt.
 If you have previously generated an RSA key pair please reference the
-[Additional Configuration Options](#aco) section below. Otherwise run the following.
+[Additional Configuration Options](#aco) section below. 
+Otherwise run the following.
 
 ```bash
 $ cms key gen pem --set_path
 ```
 
-Now that we have the initialized system and RSA key pair we can encrypt the config. 
+Now that we ran secinit and obtained an RSA key pair we can encrypt the config.
 
 ### Encrypting the Config File
 
@@ -140,7 +137,7 @@ The configuration file can be encrypted by running the following command.
 By default the encryption command will encrypt everything within the
 cloudmesh.yaml file that is not necessary for decryption. 
 To edit which attributes are encrypted or excluded from encryption reference
-the [Additional Configuration Options](#aco) section below. 
+the [Additional Configuration Options](#aco) section below.
 
 ```bash
 $ cms config encrypt
@@ -177,7 +174,7 @@ $ cms config decrypt --nopass
 The secinit directory controls where encryption related data is stored. The
 default location is ~/.cloudmesh/security. If you wish to change this location
 you must edit the `cloudmesh.security.secpath` attribute. For example, if you
-wish that cloudmesh secrets are stored within `~/.cloudmesh/.foosec` run the following
+wish to store cloudmesh secrets in `~/.cloudmesh/.foosec` run the following
 
 ```bash
 $ cms config set cloudmesh.security.secpath=~/.cloudmesh/.foosec
@@ -188,11 +185,12 @@ $ cms config secinit
 
 ##### Changing Key Names 
 
-The `cms key gen` command will automatically generate the key pair into the default
-locations of `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub`. If this key already exists or
-if you prefer a different location use the --filename=FILENAME flag. Where FILENAME is
-the full path to the key you would like to generate. For example, if we would
-like to have a keys called `cms` and `cms.pub` in the .ssh directory execute
+The `cms key gen` command by default will generate the RSA key pair into the
+locations of `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub`. If these keys already 
+exists or if you prefer a different location use the --filename=FILENAME flag.
+Where FILENAME is the full path to the key you would like to generate. 
+For example, if we would like to have a keys called `cms` and `cms.pub` in the
+.ssh directory execute the following.
 
 ```bash
 $ cms key gen pem --filename=~/.ssh/cms
@@ -202,8 +200,8 @@ $ cms key gen pem --filename=~/.ssh/cms
 
 The path to the encryption and decryption keys are located in
 `cloudmesh.security.pubickey` and `cloudmesh.security.privatekey` respectively.
-When keys are generated with the `--set_path` argument they set these attributes 
-after the keys are generated. 
+When keys are generated with the `--set_path` argument they set these attributes
+after the keys are generated.
 
 If you already have RSA keys that are PEM encoded you can set the path directly.
 For instance let us assume we already had `~/.ssh/priv/cms` and its public key
@@ -213,8 +211,6 @@ pair `~/.ssh/pub/cms.pub`
 $ cms config set cloudmesh.security.privatekey=~/.ssh/priv/cms
 $ cms config set cloudmesh.security.publickey=~/.ssh/pub/cms.pub
 ```
-
-Note: the keys can be located anywhere since they are looked up before encryption.
 
 ##### Generating a Key Without a Password
 
@@ -295,14 +291,14 @@ $ cms config security rmv --exceptions=cloudmesh.data.mongo.MONGO_PASSWORD
 ### Cloudmesh.Security Section
 
 The cloudmesh.security section was added to allow users to control encryption.
-In the current implementation the security section has five noteworthy attributes.
+This section has five noteworthy attributes.
 
 1. publickey: The path to the public key used to encrypt the attributes
 1. privatekey: The path to the private key used to decrypt the attributes
 This must be the private key-paired with the public key
 1. secpath: This is the operating system path that will hold keys and nonces
 1. secrets: A list of regular expressions to select which attributes to encrypt
-1. exceptions: A list of regular expressions to select attribute to **not** encrypt
+1. exceptions: A list of regular expressions to **deny** encrypting attributes
 
 ### Cloudmesh Tools for Encryption
 
@@ -351,7 +347,7 @@ and password-protected private key files.
 7. Take the generated key, generated, nonce, and ciphertext
 8. Encrypt the nonce and key with CmsEncryptor using RSA
 9. Store an integer encoding of the ciphertext in the cloudmesh config
-10. Store the encrypted key and nonce in separate files with the hash as base name
+10. Store the encrypted key and nonce in separate files with hashed base name
 11. Delete the temporary file
 
 #### Internal Process for Decryption
@@ -444,12 +440,12 @@ last decade but not all are useful for cloudmesh. kpcli and kedpm are two
 historical password manager, but they lack modern development. Keepass2-cli 
 has more active development but lacks some of the intuitive command line features
 that keepassXC-cli has. the gopass password manager seems useful for the intended
-purposes of cloudmesh, but it is still in early development. 
+purposes of cloudmesh, but it is still in early development.
 
 ### Referencing Encrypted Data
 
 The current implementation of configuration encryption is intended to secure 
-the configuration secrets at rest. This means all of the attributes are encrypted
+at-rest configuration secrets. This means all of the attributes are encrypted
 or none of them are. This limits the practicality of utilizing the encrypt and 
 decrypt commands. 
 
@@ -512,4 +508,3 @@ given expression for ```cms config security add ...``` is regexp at all.
 2. [gopass](<https://www.gopass.pw/>)
 3. [kedpm](<http://kedpm.sourceforge.net/>)
 4. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)
-
