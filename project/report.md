@@ -1,5 +1,9 @@
 # Encryption of Cloud Secrets
 
+:o2: please make sure you use 80 column formatting. make sure this is
+true for report and man page you modify.
+links do not have to be in 80 col format
+
 Andrew Holland 
 
 * repo: [fa19-516-144](<https://github.com/cloudmesh-community/fa19-516-144/tree/master>)
