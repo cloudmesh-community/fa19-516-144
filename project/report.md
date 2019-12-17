@@ -27,6 +27,32 @@ Repositories Impacted
 * [cloudmesh-common](<https://github.com/cloudmesh/cloudmesh-common>)
   - [util.py](<https://github.com/cloudmesh/cloudmesh-common/blob/master/cloudmesh/common/util.py>)
 
+## Quick Start
+
+Assuming you do not have cloudmesh installed run the following
+```bash
+$ mkdir cm
+$ cd cm
+$ pip install cloudmesh-installer
+$ cloudmesh-installer git clone cloud
+$ cloudmesh-installer install cloud
+$ cms help
+```
+
+Assuming you have an RSA private-public key pair with PEM or SSH format located
+at `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` you can execute the following.
+
+```bash
+$ cms config secinit
+$ cms config encrypt
+```
+
+When you want to decrypt the data run
+
+```bash
+$ cms config decrypt
+```
+
 ## Introduction
 
 The Cloudmesh project does not include the encryption of its secrets within the
