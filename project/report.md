@@ -1,4 +1,4 @@
-# Encryption of Cloud Secrets
+# Encryption of Cloudmesh Config File Secrets
 
 Andrew Holland 
 
@@ -30,6 +30,7 @@ Repositories Impacted
 ## Quick Start
 
 Assuming you do not have cloudmesh installed run the following
+
 ```bash
 $ mkdir cm
 $ cd cm
@@ -39,8 +40,8 @@ $ cloudmesh-installer install cloud
 $ cms help
 ```
 
-Assuming you have an RSA private-public key pair with PEM or SSH format located
-at `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` you can execute the following.
+Assuming you have an RSA private-public key pair located at `~/.ssh/id_rsa` and
+`~/.ssh/id_rsa.pub` with PEM or SSH encoding you can execute the following.
 
 ```bash
 $ cms config secinit
@@ -110,23 +111,23 @@ $ cms help
 Please remember to configure your `~/.cloudmesh/cloudmesh.yaml` file
 
 After the system has been installed cloudmesh will need to initialize its
-security features. If you wish to control where it is initialized reference the
-[Additional Configuration Options](#aco) section below. Otherwise, initialize
-the configuration capabilities by running the the following. 
+security features. If you wish to control where it is initialized reference 
+the [Additional Configuration Options](#aco-init) section below. Otherwise,
+initialize the configuration capabilities by running the the following. 
 
 ```bash
 $ cms config secinit
 ```
 
-Now that we have the proper system related properties initialized we need an RSA
-public-private key pair to execute encryption and decryption of the data.
+Now that we have the proper system related properties initialized we need an 
+RSA public-private key pair to execute encryption and decryption of the data.
 The public key is used to encrypt data and the private key is used to decrypt.
-If you have previously generated an RSA key pair please reference the
-[Additional Configuration Options](#aco) section below. 
+**If you have previously generated an RSA key pair** please reference the
+[Additional Configuration Options](#aco-key) section below. 
 Otherwise run the following.
 
 ```bash
-$ cms key gen pem --set_path
+$ cms key gen pem
 ```
 
 Now that we ran secinit and obtained an RSA key pair we can encrypt the config.
@@ -136,8 +137,8 @@ Now that we ran secinit and obtained an RSA key pair we can encrypt the config.
 The configuration file can be encrypted by running the following command.
 By default the encryption command will encrypt everything within the
 cloudmesh.yaml file that is not necessary for decryption. 
-To edit which attributes are encrypted or excluded from encryption reference
-the [Additional Configuration Options](#aco) section below.
+To edit which attributes are [encrypted](#aco-sec) or [excluded](#aco-exc) from
+encryption reference the [Additional Configuration Options](#aco) section below.
 
 ```bash
 $ cms config encrypt
@@ -169,7 +170,7 @@ $ cms config decrypt --nopass
 
 ### Additional Configuration Options<a name="aco"></a>
 
-#### Changing the secinit Directory
+#### Changing the secinit Directory<a name="aco-init"></a>
 
 The secinit directory controls where encryption related data is stored. The
 default location is ~/.cloudmesh/security. If you wish to change this location
@@ -183,7 +184,7 @@ $ cms config secinit
 
 #### CMS Key Gen Options 
 
-##### Changing Key Names 
+##### Generating Non-Default Key Names
 
 The `cms key gen` command by default will generate the RSA key pair into the
 locations of `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub`. If these keys already 
@@ -196,7 +197,7 @@ For example, if we would like to have a keys called `cms` and `cms.pub` in the
 $ cms key gen pem --filename=~/.ssh/cms
 ```
 
-##### Setting Keys for Encryption Without Key Gen Command
+##### Setting Keys for Encryption Without Key Gen Command<a name="aco-key"></a>
 
 The path to the encryption and decryption keys are located in
 `cloudmesh.security.pubickey` and `cloudmesh.security.privatekey` respectively.
@@ -223,42 +224,49 @@ If you understand this and still wish to generate a key without a password run
 $ cms key gen pem --nopass
 ```
 
-#### Selecting Attributes to Encrypt
+#### Selecting Attributes to Encrypt<a name="aco-sec"></a>
 
 Internally, Cloudmesh represents all attributes as the yaml dot path to the
 attribute. The `cloudmesh.security.secrets` attribute takes a list of python
 regular expressions that will be matched on the dot paths to the attributes.
 
-To learn the specifics about python regular expression please reference the 
+To learn the specifics about python regular expression please reference the
 [python re documentation](<https://docs.python.org/3.7/library/re.html>)
 
-By default, the secrets section has `.*` which encrypts everything
+Cloudmesh encrypts some values by default. To reference which values
+will be encrypted run the `cms config security list` command. This will
+print all of the attribute dot paths that will be encrypted by the
+`cms config encrypt` command.
 
-If you wish to encrypt all `AZURE_SECRET_KEY` attributes you can execute
+If you wish to add you own regular expression to encrypt attributes run
+the `cms config security add --secret=REGEXP` command. For instance,
+if you wish to encrypt all `AZURE_SECRET_KEY` attributes you can execute
 
 ```bash
-$ cms config security add --secrets=.*AZURE_SECRET_KEY
+$ cms config security add --secret=.*AZURE_SECRET_KEY
 ```
 
 If you wish to encrypt a specific attribute you can provide the dot path.
 For instance, to encrypt the mongo database `MONGO_PASSWORD`
 
 ```bash
-$ cms config security add --secrets=cloudmesh.data.mongo.MONGO_PASSWORD
+$ cms config security add --secret=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
 
 If you wish to remove any regular expressions from secrets run the following.
 
 ```bash
-$ cms config security rmv --secrets=cloudmesh.data.mongo.MONGO_PASSWORD
+$ cms config security rmv --secret=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
 
-#### Selecting Attributes to Exclude from Encryption
+#### Selecting Attributes to Exclude from Encryption<a name="aco-exc"></a>
 
-The `cloudmesh.security.exceptions` section is intended to list attributes that
+The `cloudmesh.security.exception` section is intended to list attributes that
 must **not** be encrypted. This section also explicitly uses python regular
-expressions to capture the attribute dot paths. The default exceptions
-included in the exceptions section are necessary for the decryption of data.
+expressions to capture the attribute dot paths. Cloudmesh has some attributes
+that will not be encrypted, these attributes are necessary for the decryption of
+data. You can add your own regular expressions to capture which attributes will
+not be encrypted with the `cms config security add --exception=REGEXP` command
 
 Note that the exceptions section has priority over the secrets section. If
 there is ever an attribute that is matched on both secrets and exceptions
@@ -268,13 +276,13 @@ For instance, if you wish to ensure that none of the `AZURE_SECRET_KEY`
 attributes are encrypted run the following. 
 
 ```bash
-$ cms config security add --exceptions=.*AZURE_SECRET_KEY
+$ cms config security add --exception=.*AZURE_SECRET_KEY
 ```
 
 If you wish to exclude a specific attribute give the dot path.
 
 ```bash
-$ cms config security add --exceptions=cloudmesh.data.mongo.MONGO_PASSWORD
+$ cms config security add --exception=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
 
 If you wish to remove any regular expressions within the exceptions section run
@@ -282,8 +290,8 @@ the ```cms config security rmv``` command. For instance to remove the example
 exceptions. 
 
 ```bash
-$ cms config security rmv --exceptions=.*AZURE_SECRET_KEY
-$ cms config security rmv --exceptions=cloudmesh.data.mongo.MONGO_PASSWORD
+$ cms config security rmv --exception=.*AZURE_SECRET_KEY
+$ cms config security rmv --exception=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
 
 ## Implementation
@@ -508,3 +516,7 @@ given expression for ```cms config security add ...``` is regexp at all.
 2. [gopass](<https://www.gopass.pw/>)
 3. [kedpm](<http://kedpm.sourceforge.net/>)
 4. [keepass2 cli](<https://keepass.info/help/base/cmdline.html>)
+
+## Acknowledgements
+
+Gregor von Laszewsk, for assistance in writing the manual
