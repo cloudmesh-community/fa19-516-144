@@ -29,6 +29,8 @@ Repositories Impacted
 
 ## Quick Start
 
+This guide assumes you are running an Gnu/Linux or macOS machine.
+
 Assuming you do not have cloudmesh installed run the following
 
 ```bash
@@ -40,15 +42,30 @@ $ cloudmesh-installer install cloud
 $ cms help
 ```
 
-Assuming you have an RSA private-public key pair located at `~/.ssh/id_rsa` and
-`~/.ssh/id_rsa.pub` with PEM or SSH encoding you can execute the following.
+To initalize cloudmesh security run
 
 ```bash
-$ cms config secinit
+cms config secinit
+```
+
+**If you already have already generated an RSA key pair skip the next step**
+
+Assuming you do not have an RSA public-private key pair located at
+`~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` run the following. 
+
+```bash
+cms key gen pem
+```
+
+Assuming you have an RSA private-public key pair located at `~/.ssh/id_rsa` and
+`~/.ssh/id_rsa.pub` **with PEM or SSH encoding** you can encrypt the default 
+cloudmesh secrets by executing the following
+
+```bash
 $ cms config encrypt
 ```
 
-When you want to decrypt the data run
+When you want to decrypt the configuration secrets run
 
 ```bash
 $ cms config decrypt
@@ -259,6 +276,10 @@ If you wish to remove any regular expressions from secrets run the following.
 $ cms config security rmv --secret=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
 
+You can verify the addition or removal of the rule by observing the results
+of the `cms config security list` command and confirming if the dot path 
+to the attribute you want encrypted is listed. 
+
 #### Selecting Attributes to Exclude from Encryption<a name="aco-exc"></a>
 
 The `cloudmesh.security.exception` section is intended to list attributes that
@@ -293,6 +314,9 @@ exceptions.
 $ cms config security rmv --exception=.*AZURE_SECRET_KEY
 $ cms config security rmv --exception=cloudmesh.data.mongo.MONGO_PASSWORD
 ```
+You can verify the addition or removal of the rule by observing the results
+of the `cms config security list` command and confirming that the dot path 
+to the attribute you do not want to encrypt is not listed. 
 
 ## Implementation
 
