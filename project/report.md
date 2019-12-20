@@ -162,19 +162,25 @@ stored within the `cloudmesh.security.secpath` directory. This is why the
 ```cloudmesh config secinit``` command was required during configuration.
 The secinit command ensured the directory was created. 
 
-
 #### Key Generation
 
-Cloudmesh can generate 
-
+Cloudmesh can generate keys using the ``cms key gen`` command. This command is
+integrated with the KeyHandler class. This command can generate PEM and OpenSSH
+encoded public or private RSA key. 
 
 #### Verify Key Structure and Password
 
-
+Cloudmesh can verify if a key is password protected and if a key has proper 
+PEM or SSH encoding. This is executed with the ``cms key gen verify`` command.
+The first check is to verify if the key is password protected. The encoding 
+cannot be verified without obtaining the password to decrypt the key. If the
+encoding is to be checked the ``--check_pass`` argument should be utilized.
 
 #### Reformatting a Keys Structure and Password
 
-
+Cloudmesh can reformat PEM or SSH encoded keys between each other by using the
+``cloudmesh key reformat command``. This command can be useful to retain the
+original value of a key but to change the formatting for key purposes.
 
 ##### Attempt to Automate with SSH-Agent
 
@@ -298,4 +304,4 @@ given expression for ```cms config security add ...``` is regexp at all.
 
 ## Acknowledgments
 
-Gregor von Laszewsk, for assistance in writing the manual
+Gregor von Laszewsk, for assistance in writing the config encryption page
