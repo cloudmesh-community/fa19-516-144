@@ -56,7 +56,7 @@ further security opportunities that could be addressed in the future.
 ## Installation and Using Cloudmesh Config Encryption
 
 The installation and process of encryption is described in detail
-within [Cloudmesh Config File Encryption](<https://cloudmesh.github.io/cloudmesh-manual/configuration/encryption.html>)
+within [Cloudmesh Config File Encryption](<https://cloudmesh.github.io/cloudmesh-manual/configuration/encryption.html>) with specifice rst file located [here](<https://github.com/cloudmesh/cloudmesh-manual/blob/master/docs-source/source/configuration/encryption.rst>)
 
 ## Implementation
 
