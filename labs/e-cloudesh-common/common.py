@@ -19,7 +19,7 @@ StopWatch.start("test")
 # E.Cloudmesh.Common.1
 banner("Exercise Cloudmesh Common", color="GREEN")
 
-# Sets variables within  ~/.cloudmesh/var-data 
+# Sets variables within  ~/.cloudmesh/cms burn
 varz = Variables()
 varz['debug'] = True
 varz['trace'] = True
